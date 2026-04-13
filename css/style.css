@@ -1,21 +1,42 @@
 @import url('https://fonts.googleapis.com/css2?family=GrandSlang+Roman&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     background: #091413;
+    margin: 0;
+}
+
+.container {
+    padding-top: clamp(2rem, 6vw, 5rem);
+    padding-bottom: clamp(2rem, 6vw, 5rem);
+}
+
+.presentazione {
+    max-width: 42rem;
 }
 
 .nome-cognome {
     font-family: "Montserrat", sans-serif;
-    font-size: 1.5rem;
+    font-size: clamp(1.35rem, 1rem + 1vw, 2.1rem);
     color: #285A48;
-    margin-bottom: 1rem;
+    margin-bottom: clamp(0.75rem, 1vw, 1.25rem);
 }
 
 .lead {
     font-family: "Montserrat", sans-serif;
-    font-size: 1rem;
+    font-size: clamp(1rem, 0.9rem + 0.45vw, 1.35rem);
+    line-height: 1.6;
     color: #285A48;
+}
+
+.link ul {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.35rem, 1vw, 0.9rem);
 }
 
 .link a {
@@ -23,7 +44,8 @@ body {
     text-decoration: none;
     color: #B0E4CC;
     font-family: "GrandSlang Roman", "GrandSlang Roman Placeholder", sans-serif;
-    font-size: 8rem;
+    font-size: clamp(2.5rem, 7vw, 7.5rem);
+    line-height: 0.95;
     white-space: nowrap;
     transition: color 0.3s ease, transform 0.3s ease;
 }
@@ -31,4 +53,29 @@ body {
 .link a:hover {
     color: #408A71;
     transform: skew(-12deg);
+}
+
+@media (max-width: 991.98px) {
+    .presentazione {
+        max-width: 100%;
+    }
+
+    .link {
+        margin-top: 0.5rem;
+    }
+
+    .link a {
+        white-space: normal;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .container {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
+
+    .link a {
+        font-size: clamp(2.2rem, 12vw, 4rem);
+    }
 }
