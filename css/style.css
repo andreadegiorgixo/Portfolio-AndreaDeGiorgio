@@ -92,6 +92,18 @@ a {
     min-height: 82vh;
 }
 
+.hero-caption {
+    max-width: 18rem;
+    margin-left: auto;
+    margin-right: auto;
+    color: var(--text-muted);
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
 .link a {
     position: relative;
     display: inline-block;
@@ -165,5 +177,11 @@ a {
     .link a,
     .link a::after {
         transition: none;
+    }
+}
+
+@media (min-width: 992px) {
+    .hero-caption {
+        margin-right: 0;
     }
 }
