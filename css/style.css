@@ -104,6 +104,11 @@ a {
     text-transform: uppercase;
 }
 
+.hero-caption-brevePresentazione {
+    font-family: "Montserrat", "Montserrat Placeholder", sans-serif;
+
+}
+
 .link a {
     position: relative;
     display: inline-block;
