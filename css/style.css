@@ -40,7 +40,7 @@ a {
 }
 
 .framer-1iemjr1 {
-    max-width: 40%;
+    max-width: 5%;
     height: 0.1px;
     align-self: center;
     background-color: #b0e4cc !important;
@@ -338,4 +338,17 @@ a {
     .hero-avatar {
         width: min(24vw, 23rem);
     }
+}
+
+/* SEZIONE PER LA PAGINA CONTACTS */
+
+.link-home-contacts {
+    font-family: "Montserrat", sans-serif;
+    text-decoration: none;
+}
+
+.link-home-contacts:hover {
+    color: #408a71;
+    text-decoration: underline;
+    text-underline-offset: 0.5rem;
 }
