@@ -27,6 +27,103 @@
         </div>
     </div>
 
+    <main class="container px-3 px-sm-4 px-lg-0 py-6-custom">
+        <section class="row justify-content-center">
+            <div class="col-12 col-lg-10">
+                <div class="contacts-card p-4 p-md-5">
+                    <p class="contacts-eyebrow mb-2">Contacts</p>
+                    <h1 class="contacts-title mb-3">Restiamo in contatto.</h1>
+                    <p class="contacts-intro mb-4">
+                        Se vuoi scrivermi per collaborazioni, progetti o semplicemente per fare networking, qui trovi i
+                        miei principali riferimenti.
+                    </p>
+
+                    <div class="row g-3">
+
+                        <div class="col-12 col-md-4">
+                            <a href="https://www.linkedin.com/in/andrea-de-giorgio-a96937265/?locale=it-IT"
+                                class="contact-item d-flex flex-column text-decoration-none p-3 p-sm-4 h-100"
+                                target="_blank" rel="noopener noreferrer">
+                                <p class="contact-label mb-1">LinkedIn</p>
+                                <p class="contact-value mb-2">Andrea De Giorgio</p>
+                            </a>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <a href="https://www.instagram.com/_andreadegiorgixo/"
+                                class="contact-item d-flex flex-column text-decoration-none p-3 p-sm-4 h-100"
+                                target="_blank" rel="noopener noreferrer">
+                                <p class="contact-label mb-1">Instagram</p>
+                                <p class="contact-value mb-2">@_andreadegiorgixo</p>
+                            </a>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <a href="https://www.threads.net/@_andreadegiorgixo"
+                                class="contact-item d-flex flex-column text-decoration-none p-3 p-sm-4 h-100"
+                                target="_blank" rel="noopener noreferrer">
+                                <p class="contact-label mb-1">Threads</p>
+                                <p class="contact-value mb-2">@_andreadegiorgixo</p>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="contacts-divider my-4 my-md-5"></div>
+
+                    <div class="row align-items-start g-4">
+                        <div class="col-12 col-lg-5">
+                            <p class="contacts-eyebrow mb-2">Form</p>
+                            <h2 class="contacts-form-title mb-3">Mandami un messaggio.</h2>
+                            <p class="contacts-intro mb-0">
+                                Se hai un'idea, una proposta o vuoi semplicemente metterti in contatto con me,
+                                compilando questo form il tuo messaggio mi arriverà direttamente via email.
+                            </p>
+                        </div>
+
+                        <div class="col-12 col-lg-7">
+                            <form action="https://api.web3forms.com/submit" method="POST"
+                                class="contacts-form p-3 p-sm-4">
+                                <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+                                <input type="hidden" name="subject" value="Nuovo messaggio dal portfolio">
+                                <input type="hidden" name="from_name" value="Portfolio Andrea De Giorgio">
+                                <input type="checkbox" name="botcheck" class="d-none" tabindex="-1"
+                                    autocomplete="off">
+
+                                <div class="row g-3">
+                                    <div class="col-12 col-md-6">
+                                        <label for="contact-name" class="form-label contact-label mb-2">Nome e Cognome</label>
+                                        <input type="text" class="form-control contacts-input" id="contact-name"
+                                            name="name" placeholder="Nome e cognome" required>
+                                    </div>
+
+                                    <div class="col-12 col-md-6">
+                                        <label for="contact-email" class="form-label contact-label mb-2">Email</label>
+                                        <input type="email" class="form-control contacts-input" id="contact-email"
+                                            name="email" placeholder="nome@email.com" required>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="contact-message"
+                                            class="form-label contact-label mb-2">Messaggio</label>
+                                        <textarea class="form-control contacts-input contacts-textarea"
+                                            id="contact-message" name="message" rows="6"
+                                            placeholder="Scrivi qui il tuo messaggio" required></textarea>
+                                    </div>
+
+                                    <div class="col-12 d-flex justify-content-start">
+                                        <button type="submit" class="btn contacts-submit px-4 py-3">
+                                            Invia messaggio
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
