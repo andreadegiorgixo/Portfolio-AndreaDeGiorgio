@@ -40,12 +40,14 @@ a {
 }
 
 .framer-1iemjr1 {
-    max-width: 10%;
-    height: 0.1px;
+    width: 100%;
+    min-width: 2.5rem;
+    max-width: 6rem;
+    height: 0.5px;
     align-self: center;
     background-color: #b0e4cc !important;
     opacity: 1;
-    margin-left: 2rem !important;
+    margin-left: 1rem !important;
 }
 
 .page-shell {
