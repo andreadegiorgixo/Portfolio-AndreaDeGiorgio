@@ -103,6 +103,7 @@ a {
 
 .hero-avatar {
     max-width: 21rem;
+    animation: heroAvatarReveal 1s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
 }
 
 .hero-caption {
@@ -111,6 +112,7 @@ a {
     color: var(--text-muted);
     font-family: "Montserrat", sans-serif;
     text-align: center;
+    animation: heroCaptionReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
 }
 
 .hero-caption-role {
@@ -185,16 +187,46 @@ a {
     }
 }
 
+@keyframes heroAvatarReveal {
+    from {
+        opacity: 0;
+        transform: translateY(34px) scale(0.92) rotate(-4deg);
+        filter: blur(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotate(0deg);
+        filter: blur(0);
+    }
+}
+
+@keyframes heroCaptionReveal {
+    from {
+        opacity: 0;
+        transform: translateY(22px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     html {
         scroll-behavior: auto;
     }
 
+    .hero-avatar,
+    .hero-caption,
     .link a {
         animation: none;
     }
 
     .social-link,
+    .hero-avatar,
+    .hero-caption,
     .link a,
     .link a::after {
         transition: none;
