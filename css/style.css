@@ -353,6 +353,274 @@ a {
     }
 }
 
+/* SEZIONE ABOUT ME */
+
+.about-eyebrow {
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+}
+
+.about-title {
+    font-family: "GrandSlang Roman", serif;
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    line-height: 0.95;
+    color: var(--text);
+}
+
+.about-intro {
+    font-family: "Montserrat", sans-serif;
+    font-size: 1rem;
+    line-height: 1.85;
+    color: var(--text-muted);
+}
+
+.about-cv-photo {
+    width: 100%;
+    max-width: 18rem;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center top;
+}
+
+.about-summary-label {
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+}
+
+.about-summary-text {
+    font-family: "Montserrat", sans-serif;
+    line-height: 1.8;
+    color: var(--text-muted);
+}
+
+.about-lead {
+    max-width: 72rem;
+    font-family: "Montserrat", sans-serif;
+    font-size: clamp(1.2rem, 2vw, 1.65rem);
+    line-height: 1.75;
+    color: var(--text);
+}
+
+.about-simple-copy {
+    max-width: 70rem;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1rem;
+    line-height: 1.9;
+    color: var(--text-muted);
+}
+
+.about-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.55rem 0.9rem;
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text);
+    background: transparent;
+}
+
+.timeline-title {
+    font-family: "GrandSlang Roman", serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    line-height: 0.98;
+    color: var(--text);
+}
+
+.timeline-caption {
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+}
+
+.timeline {
+    position: relative;
+    padding-left: 1.6rem;
+}
+
+.timeline::before {
+    content: "";
+    position: absolute;
+    top: 0.2rem;
+    bottom: 0.2rem;
+    left: 0.35rem;
+    width: 1px;
+    background: var(--border-strong);
+}
+
+.timeline-item {
+    position: relative;
+}
+
+.timeline-dot {
+    position: absolute;
+    top: 0.32rem;
+    left: -1.6rem;
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 999px;
+    background: var(--text);
+    box-shadow: 0 0 0 0.25rem rgba(176, 228, 204, 0.1);
+}
+
+.timeline-period {
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+}
+
+.timeline-role {
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.timeline-place {
+    font-family: "Montserrat", sans-serif;
+    color: var(--text-muted);
+}
+
+.timeline-description {
+    font-family: "Montserrat", sans-serif;
+    line-height: 1.8;
+    color: var(--text-muted);
+}
+
+@media (min-width: 992px) {
+    .py-lg-6 {
+        padding-top: 4rem !important;
+        padding-bottom: 4rem !important;
+    }
+
+    .about-cv-photo {
+        max-width: 16rem;
+    }
+}
+
+.contacts-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+    animation: contactsDividerReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both;
+}
+
+.contacts-form-title {
+    font-family: "GrandSlang Roman", serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    line-height: 0.98;
+    color: var(--text);
+}
+
+.contacts-form {
+    background: rgba(9, 20, 19, 0.62);
+    border: 1px solid var(--border);
+    border-radius: 1.2rem;
+    animation: contactsSoftReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.56s both;
+}
+
+.contacts-input {
+    background: rgba(12, 27, 25, 0.96);
+    border: 1px solid var(--border);
+    border-radius: 0.95rem;
+    color: var(--text);
+    font-family: "Montserrat", sans-serif;
+    padding: 0.9rem 1rem;
+}
+
+.contacts-input:focus {
+    background: rgba(12, 27, 25, 0.96);
+    border-color: var(--border-strong);
+    box-shadow: 0 0 0 0.2rem rgba(64, 138, 113, 0.18);
+    color: var(--text);
+}
+
+.contacts-input::placeholder {
+    color: var(--text-soft);
+}
+
+.contacts-textarea {
+    min-height: 10rem;
+    resize: vertical;
+}
+
+.contacts-submit {
+    background: var(--text);
+    border: 1px solid var(--text);
+    border-radius: 999px;
+    color: var(--bg);
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.contacts-submit:hover,
+.contacts-submit:focus,
+.contacts-submit:active {
+    background: transparent;
+    border-color: var(--text);
+    color: var(--text);
+}
+
+@keyframes contactsPanelReveal {
+    from {
+        opacity: 0;
+        transform: translateY(28px);
+        filter: blur(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+@keyframes contactsSoftReveal {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes contactsDividerReveal {
+    from {
+        opacity: 0;
+        transform: scaleX(0.4);
+        transform-origin: left center;
+    }
+
+    to {
+        opacity: 1;
+        transform: scaleX(1);
+        transform-origin: left center;
+    }
+}
+
+
 /* SEZIONE PER LA PAGINA CONTACTS */
 
 .link-home-contacts {
@@ -460,110 +728,4 @@ a {
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--text-muted);
-}
-
-.contacts-divider {
-    width: 100%;
-    height: 1px;
-    background: var(--border);
-    animation: contactsDividerReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both;
-}
-
-.contacts-form-title {
-    font-family: "GrandSlang Roman", serif;
-    font-size: clamp(1.8rem, 4vw, 3rem);
-    line-height: 0.98;
-    color: var(--text);
-}
-
-.contacts-form {
-    background: rgba(9, 20, 19, 0.62);
-    border: 1px solid var(--border);
-    border-radius: 1.2rem;
-    animation: contactsSoftReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.56s both;
-}
-
-.contacts-input {
-    background: rgba(12, 27, 25, 0.96);
-    border: 1px solid var(--border);
-    border-radius: 0.95rem;
-    color: var(--text);
-    font-family: "Montserrat", sans-serif;
-    padding: 0.9rem 1rem;
-}
-
-.contacts-input:focus {
-    background: rgba(12, 27, 25, 0.96);
-    border-color: var(--border-strong);
-    box-shadow: 0 0 0 0.2rem rgba(64, 138, 113, 0.18);
-    color: var(--text);
-}
-
-.contacts-input::placeholder {
-    color: var(--text-soft);
-}
-
-.contacts-textarea {
-    min-height: 10rem;
-    resize: vertical;
-}
-
-.contacts-submit {
-    background: var(--text);
-    border: 1px solid var(--text);
-    border-radius: 999px;
-    color: var(--bg);
-    font-family: "Montserrat", sans-serif;
-    font-size: 0.85rem;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-}
-
-.contacts-submit:hover,
-.contacts-submit:focus,
-.contacts-submit:active {
-    background: transparent;
-    border-color: var(--text);
-    color: var(--text);
-}
-
-@keyframes contactsPanelReveal {
-    from {
-        opacity: 0;
-        transform: translateY(28px);
-        filter: blur(10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-        filter: blur(0);
-    }
-}
-
-@keyframes contactsSoftReveal {
-    from {
-        opacity: 0;
-        transform: translateY(18px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes contactsDividerReveal {
-    from {
-        opacity: 0;
-        transform: scaleX(0.4);
-        transform-origin: left center;
-    }
-
-    to {
-        opacity: 1;
-        transform: scaleX(1);
-        transform-origin: left center;
-    }
 }
