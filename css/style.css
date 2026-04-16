@@ -9,6 +9,8 @@
     --border: rgba(176, 228, 204, 0.18);
     --border-strong: rgba(176, 228, 204, 0.28);
     --accent: #408a71;
+    --font-sans: "Montserrat", sans-serif;
+    --font-display: "GrandSlang-Roman", "Times New Roman", serif;
 }
 
 *,
@@ -81,7 +83,7 @@ a {
 .sidebar-year {
     writing-mode: vertical-rl;
     transform: rotate(180deg);
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-sans);
     font-size: 0.78rem;
     letter-spacing: 0.18em;
     color: var(--text-soft);
@@ -110,7 +112,7 @@ a {
     margin-right: auto;
     max-width: 28rem;
     color: var(--text-muted);
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-sans);
     text-align: center;
     animation: heroCaptionReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
 }
@@ -132,7 +134,7 @@ a {
     color: var(--text);
     font-size: 0.95rem;
     font-weight: 700;
-    font-family: 'GrandSlang-Roman';
+    font-family: var(--font-display);
     letter-spacing: 0.12em;
     text-transform: uppercase;
     box-shadow: 0 16px 32px rgba(0, 0, 0, 0.18);
@@ -170,7 +172,7 @@ a {
     display: inline-block;
     color: var(--text);
     text-decoration: none;
-    font-family: "GrandSlang-Roman", serif;
+    font-family: var(--font-display);
     font-size: clamp(4.2rem, 8vw, 8.8rem);
     line-height: 0.96;
     transform-origin: left center;
@@ -356,7 +358,7 @@ a {
 /* SEZIONE ABOUT ME */
 
 .about-eyebrow {
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-sans);
     font-size: 0.78rem;
     font-weight: 700;
     letter-spacing: 0.18em;
@@ -365,14 +367,14 @@ a {
 }
 
 .about-title {
-    font-family: "GrandSlang-Roman", serif;
+    font-family: var(--font-display);
     font-size: clamp(2.5rem, 7vw, 5rem);
     line-height: 0.95;
     color: var(--text);
 }
 
 .about-intro {
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-sans);
     font-size: 1rem;
     line-height: 1.85;
     color: var(--text-muted);
@@ -387,7 +389,7 @@ a {
 }
 
 .about-summary-label {
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-sans);
     font-size: 0.78rem;
     font-weight: 700;
     letter-spacing: 0.16em;
@@ -396,14 +398,14 @@ a {
 }
 
 .about-summary-text {
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-sans);
     line-height: 1.8;
     color: var(--text-muted);
 }
 
 .about-lead {
     max-width: 72rem;
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-sans);
     font-size: clamp(1.2rem, 2vw, 1.65rem);
     line-height: 1.75;
     color: var(--text);
@@ -411,7 +413,7 @@ a {
 
 .about-simple-copy {
     max-width: 70rem;
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-sans);
     font-size: 1rem;
     line-height: 1.9;
     color: var(--text-muted);
@@ -423,7 +425,7 @@ a {
     padding: 0.55rem 0.9rem;
     border: 1px solid var(--border-strong);
     border-radius: 999px;
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-sans);
     font-size: 0.78rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -432,14 +434,14 @@ a {
 }
 
 .timeline-title {
-    font-family: "GrandSlang-Roman", serif;
+    font-family: var(--font-display);
     font-size: clamp(1.8rem, 4vw, 3rem);
     line-height: 0.98;
     color: var(--text);
 }
 
 .timeline-caption {
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-sans);
     font-size: 0.82rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -477,7 +479,7 @@ a {
 }
 
 .timeline-period {
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-sans);
     font-size: 0.78rem;
     font-weight: 700;
     letter-spacing: 0.16em;
@@ -486,19 +488,19 @@ a {
 }
 
 .timeline-role {
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-sans);
     font-size: 1.1rem;
     font-weight: 700;
     color: var(--text);
 }
 
 .timeline-place {
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-sans);
     color: var(--text-muted);
 }
 
 .timeline-description {
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-sans);
     line-height: 1.8;
     color: var(--text-muted);
 }
@@ -513,7 +515,7 @@ a {
     background: transparent;
     color: var(--text);
     box-shadow: none;
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-sans);
     font-size: 1rem;
     font-weight: 700;
     letter-spacing: 0.04em;
@@ -539,7 +541,7 @@ a {
     padding-right: 0;
     padding-top: 0.2rem;
     padding-bottom: 1.5rem;
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-sans);
     line-height: 1.8;
     color: var(--text-muted);
 }
@@ -571,7 +573,7 @@ a {
 }
 
 .contacts-form-title {
-    font-family: "GrandSlang-Roman", serif;
+    font-family: var(--font-display);
     font-size: clamp(1.8rem, 4vw, 3rem);
     line-height: 0.98;
     color: var(--text);
@@ -589,7 +591,7 @@ a {
     border: 1px solid var(--border);
     border-radius: 0.95rem;
     color: var(--text);
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-sans);
     padding: 0.9rem 1rem;
 }
 
@@ -614,7 +616,7 @@ a {
     border: 1px solid var(--text);
     border-radius: 999px;
     color: var(--bg);
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-sans);
     font-size: 0.85rem;
     font-weight: 700;
     letter-spacing: 0.16em;
@@ -673,7 +675,7 @@ a {
 /* SEZIONE PER LA PAGINA CONTACTS */
 
 .link-home-contacts {
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-sans);
     text-decoration: none;
 }
 
@@ -697,7 +699,7 @@ a {
 }
 
 .contacts-eyebrow {
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-sans);
     font-size: 0.78rem;
     font-weight: 700;
     letter-spacing: 0.18em;
@@ -707,7 +709,7 @@ a {
 }
 
 .contacts-title {
-    font-family: "GrandSlang-Roman", serif;
+    font-family: var(--font-display);
     font-size: clamp(2.3rem, 6vw, 4.5rem);
     line-height: 0.95;
     color: var(--text);
@@ -716,7 +718,7 @@ a {
 
 .contacts-intro {
     max-width: 42rem;
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-sans);
     font-size: 1rem;
     line-height: 1.8;
     color: var(--text-muted);
@@ -755,7 +757,7 @@ a {
 }
 
 .contact-label {
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-sans);
     font-size: 0.78rem;
     font-weight: 700;
     letter-spacing: 0.18em;
@@ -764,7 +766,7 @@ a {
 }
 
 .contact-value {
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-sans);
     font-size: clamp(1rem, 2vw, 1rem);
     font-weight: 400;
     color: var(--text);
@@ -772,7 +774,7 @@ a {
 }
 
 .contact-meta {
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-sans);
     font-size: 0.82rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
