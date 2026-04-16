@@ -9,6 +9,7 @@
     --border: rgba(176, 228, 204, 0.18);
     --border-strong: rgba(176, 228, 204, 0.28);
     --accent: #408a71;
+    --accent-rgb: 64, 138, 113;
     --font-sans: "Montserrat", sans-serif;
     --font-display: "GrandSlang-Roman", "Times New Roman", serif;
 }
@@ -28,6 +29,41 @@ body {
     overflow-x: hidden;
     background: var(--bg);
     color: var(--text);
+}
+
+.custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 50%;
+    background: rgba(var(--accent-rgb), 0.6);
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: none;
+    opacity: 0;
+    z-index: 9999;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.custom-cursor.is-visible {
+    opacity: 1;
+}
+
+.custom-cursor.is-hovering {
+    transform: translate(-50%, -50%) scale(1.35);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    body,
+    a,
+    button,
+    input,
+    textarea,
+    select,
+    label {
+        cursor: none;
+    }
 }
 
 a {
