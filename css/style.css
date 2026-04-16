@@ -503,6 +503,55 @@ a {
     color: var(--text-muted);
 }
 
+.about-faq .accordion-item {
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.about-faq .accordion-button {
+    background: transparent;
+    color: var(--text);
+    box-shadow: none;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.about-faq .accordion-button:not(.collapsed) {
+    background: transparent;
+    color: var(--text);
+}
+
+.about-faq .accordion-button:focus {
+    box-shadow: none;
+}
+
+.about-faq .accordion-button::after {
+    filter: brightness(0) saturate(100%) invert(88%) sepia(11%) saturate(577%) hue-rotate(97deg) brightness(94%) contrast(92%);
+}
+
+.about-faq .accordion-body {
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0.2rem;
+    padding-bottom: 1.5rem;
+    font-family: "Montserrat", sans-serif;
+    line-height: 1.8;
+    color: var(--text-muted);
+}
+
+.about-faq-list {
+    padding-left: 1.2rem;
+}
+
+.about-faq-list li + li {
+    margin-top: 0.55rem;
+}
+
 @media (min-width: 992px) {
     .py-lg-6 {
         padding-top: 4rem !important;
