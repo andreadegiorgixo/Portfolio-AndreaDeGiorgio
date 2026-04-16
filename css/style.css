@@ -64,8 +64,6 @@ a {
     justify-content: center;
     width: 2.75rem;
     height: 2.75rem;
-    border: 1px solid var(--border-strong);
-    border-radius: 999px;
     color: var(--text);
     text-decoration: none;
     transition: transform 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
