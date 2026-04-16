@@ -15,8 +15,9 @@
 
 <body>
 
-    <div class="container-fluid d-flex align-items-center gap-3 pt-3 ps-3">
-        <section class="logo-linkedin">
+    <div class="container-fluid px-3 px-sm-4 px-lg-5 pt-3 pt-sm-4">
+        <div class="row align-items-center g-3">
+            <section class="col-auto logo-linkedin">
             <a href="https://www.linkedin.com/in/andrea-de-giorgio-a96937265/?locale=it-IT">
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" aria-label="LinkedIn"
                     style="color: #B0E4CC;">
@@ -32,8 +33,8 @@
                         stroke-linejoin="round" />
                 </svg>
             </a>
-        </section>
-        <section class="logo-instagram">
+            </section>
+            <section class="col-auto logo-instagram">
             <a href="https://www.instagram.com/_andreadegiorgixo/">
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"
                     aria-label="Instagram" style="color: #B0E4CC;">
@@ -43,8 +44,8 @@
                     <circle cx="17.1" cy="6.9" r="1.1" fill="none" stroke="currentColor" stroke-width="1.5" />
                 </svg>
             </a>
-        </section>
-        <section class="logo-threads">
+            </section>
+            <section class="col-auto logo-threads">
             <a href="https://www.threads.net/@_andreadegiorgixo">
                 <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-threads"
                     viewBox="0 0 16 16" style="color: #B0E4CC;">
@@ -52,25 +53,39 @@
                         d="M6.321 6.016c-.27-.18-1.166-.802-1.166-.802.756-1.081 1.753-1.502 3.132-1.502.975 0 1.803.327 2.394.948s.928 1.509 1.005 2.644q.492.207.905.484c1.109.745 1.719 1.86 1.719 3.137 0 2.716-2.226 5.075-6.256 5.075C4.594 16 1 13.987 1 7.994 1 2.034 4.482 0 8.044 0 9.69 0 13.55.243 15 5.036l-1.36.353C12.516 1.974 10.163 1.43 8.006 1.43c-3.565 0-5.582 2.171-5.582 6.79 0 4.143 2.254 6.343 5.63 6.343 2.777 0 4.847-1.443 4.847-3.556 0-1.438-1.208-2.127-1.27-2.127-.236 1.234-.868 3.31-3.644 3.31-1.618 0-3.013-1.118-3.013-2.582 0-2.09 1.984-2.847 3.55-2.847.586 0 1.294.04 1.663.114 0-.637-.54-1.728-1.9-1.728-1.25 0-1.566.405-1.967.868ZM8.716 8.19c-2.04 0-2.304.87-2.304 1.416 0 .878 1.043 1.168 1.6 1.168 1.02 0 2.067-.282 2.232-2.423a6.2 6.2 0 0 0-1.528-.161" />
                 </svg>
             </a>
-        </section>
-        <div class="framer-1iemjr1" data-framer-name="Line"></div>
+            </section>
+            <div class="col">
+                <div class="framer-1iemjr1 w-100" data-framer-name="Line"></div>
+            </div>
+        </div>
     </div>
-    <div class="container-fluid hero-container d-flex align-items-center px-3 px-sm-4 px-lg-5 pt-5 pb-4 py-lg-5">
-        <div class="row w-100 align-items-center gy-5 gx-lg-5">
+    <main class="container-fluid hero-container d-flex align-items-center px-3 px-sm-4 px-lg-5 py-4 py-sm-5">
+        <div class="row w-100 align-items-center justify-content-center gy-5 gy-xl-0 gx-0 gx-lg-5">
             <section
-                class="hero-intro col-10 col-sm-8 col-md-7 col-lg-6 col-xl-5 mx-auto mt-4 mt-sm-5 mt-lg-0">
+                class="hero-intro col-12 col-sm-10 col-md-8 col-lg-5 col-xl-4">
                 <img src="res/favicon.png" alt="Logo Andrea De Giorgio"
-                    class="hero-avatar img-fluid d-block mx-auto ms-lg-0" width="60%">
+                    class="hero-avatar img-fluid d-block mx-auto ms-lg-0">
                 <div class="hero-caption w-100 px-2 px-lg-0 pe-lg-4">
                     <p class="hero-caption-role mb-2">Andrea De Giorgio</p>
-                    <p class="hero-caption-text fs-6 mb-0">
+                    <p class="hero-caption-text fs-6 mb-0 mx-auto mx-lg-0">
                         Appassionato di tecnologia e innovazione, sempre alla ricerca di nuove competenze e sfide per
                         mettermi in gioco.
                     </p>
                 </div>
+                <div class="d-grid gap-3 w-100 d-lg-none text-center my-5">
+                    <a href="html/about-me.html" class="btn mobile-quicklink d-flex align-items-center justify-content-center text-center px-4 py-3">
+                        <span>About Me</span>
+                    </a>
+                    <a href="html/projects.html" class="btn mobile-quicklink d-flex align-items-center justify-content-center text-center px-4 py-3">
+                        <span>Projects</span>
+                    </a>
+                    <a href="html/contacts.html" class="btn mobile-quicklink d-flex align-items-center justify-content-center text-center px-4 py-3">
+                        <span>Contacts</span>
+                    </a>
+                </div>
             </section>
 
-            <section class="link col-12 col-lg-7 col-xl-6 text-center mt-4 mt-sm-5 mt-lg-0">
+            <section class="link d-none d-lg-flex col-lg-7 col-xl-6">
                 <ul class="list-unstyled mb-0 d-flex flex-column gap-2 gap-sm-3">
                     <li><a href="html/about-me.html" class="text-nowrap">ABOUT ME</a></li>
                     <li><a href="html/projects.html" class="text-nowrap">PROJECTS</a></li>
@@ -78,7 +93,7 @@
                 </ul>
             </section>
         </div>
-    </div>
+    </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"

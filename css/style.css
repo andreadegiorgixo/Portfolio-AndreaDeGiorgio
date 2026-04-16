@@ -41,8 +41,7 @@ a {
 }
 
 .framer-1iemjr1 {
-    flex: 1 1 auto;
-    max-width: 20%;
+    min-width: 3rem;
     height: 2px;
     align-self: center;
     background-color: #b0e4cc !important;
@@ -89,7 +88,7 @@ a {
 }
 
 .hero-container {
-    min-height: 82vh;
+    min-height: calc(100vh - 5rem);
 }
 
 .hero-intro {
@@ -102,13 +101,14 @@ a {
 }
 
 .hero-avatar {
-    max-width: 21rem;
+    width: min(72vw, 21rem);
     animation: heroAvatarReveal 1s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
 }
 
 .hero-caption {
     margin-left: auto;
     margin-right: auto;
+    max-width: 28rem;
     color: var(--text-muted);
     font-family: "Montserrat", sans-serif;
     text-align: center;
@@ -127,13 +127,38 @@ a {
     letter-spacing: 0.01em;
 }
 
+.mobile-quicklink {
+    background: var(--panel);
+    color: var(--text);
+    font-size: 0.95rem;
+    font-weight: 700;
+    font-family: "GrandSlang Roman", serif;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.18);
+}
+
+.mobile-quicklink:hover,
+.mobile-quicklink:focus,
+.mobile-quicklink:active {
+    color: var(--text);
+    background: rgba(12, 27, 25, 0.96);
+    border-color: var(--text);
+}
+
+.mobile-quicklink-arrow {
+    color: var(--text-soft);
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+}
+
 .link a {
     position: relative;
     display: inline-block;
     color: var(--text);
     text-decoration: none;
     font-family: "GrandSlang Roman", serif;
-    font-size: clamp(4rem, 11vw, 8.8rem);
+    font-size: clamp(4.2rem, 8vw, 8.8rem);
     line-height: 0.96;
     transform-origin: left center;
     transition: color 0.3s ease, transform 0.3s ease, letter-spacing 0.3s ease;
@@ -233,6 +258,41 @@ a {
     }
 }
 
+@media (max-width: 575.98px) {
+    .hero-container {
+        min-height: auto;
+        align-items: flex-start !important;
+    }
+
+    .hero-intro {
+        gap: 1.5rem;
+    }
+
+    .hero-avatar {
+        width: min(64vw, 12rem);
+    }
+
+    .hero-caption-role {
+        font-size: 0.74rem;
+        letter-spacing: 0.15em;
+    }
+
+    .hero-caption-text {
+        font-size: 0.95rem;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 991.98px) {
+    .hero-container {
+        min-height: auto;
+        align-items: flex-start !important;
+    }
+
+    .hero-avatar {
+        width: min(50vw, 15rem);
+    }
+}
+
 @media (min-width: 992px) {
     .hero-intro {
         align-items: flex-start;
@@ -240,7 +300,6 @@ a {
     }
 
     .link {
-        display: flex;
         align-items: center;
         justify-content: center;
     }
@@ -253,9 +312,20 @@ a {
         margin-left: 0;
         margin-right: 0;
         text-align: left;
+        padding-right: 1.5rem;
     }
 
-    .hero-caption {
-        padding-right: 1.5rem;
+    .hero-caption-text {
+        max-width: 24rem;
+    }
+}
+
+@media (min-width: 1400px) {
+    .hero-container {
+        min-height: 100vh;
+    }
+
+    .hero-avatar {
+        width: min(24vw, 23rem);
     }
 }
