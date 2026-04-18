@@ -114,6 +114,20 @@ a {
     min-height: calc(100vh - 5rem);
 }
 
+@media (min-width: 992px) {
+    .home-social-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 20;
+    }
+
+    .home-social-bar + .hero-container {
+        padding-top: 6.5rem !important;
+    }
+}
+
 .hero-intro {
     display: flex;
     flex-direction: column;
@@ -305,10 +319,6 @@ a {
 }
 
 @media (max-width: 575.98px) {
-    .hero-container {
-        min-height: auto;
-        align-items: flex-start !important;
-    }
 
     .hero-intro {
         gap: 1.5rem;
@@ -895,6 +905,19 @@ a {
 
 .contacts-form-status.is-pending {
     color: var(--text);
+}
+
+.policy-copy {
+    max-width: 52rem;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.95;
+    color: var(--text-muted);
+    animation: aboutCopyReveal 0.95s cubic-bezier(0.22, 1, 0.36, 1) 0.22s both;
+}
+
+.policy-copy p {
+    margin-bottom: 1.8rem;
 }
 
 @keyframes contactsPanelReveal {
