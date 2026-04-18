@@ -31,23 +31,14 @@ body {
     color: var(--text);
 }
 
-.custom-cursor.is-visible {
-    opacity: 1;
-}
-
-.custom-cursor.is-hovering {
-    transform: translate(-50%, -50%) scale(1.35);
-}
-
 @media (hover: hover) and (pointer: fine) {
     body,
     a,
     button,
     input,
     textarea,
-    select,
-    label {
-        cursor: none;
+    select {
+        cursor: default;
     }
 }
 
@@ -826,7 +817,6 @@ a {
 
 .contacts-submit:disabled {
     opacity: 0.72;
-    cursor: not-allowed;
 }
 
 .contacts-submit:hover,
