@@ -1074,6 +1074,15 @@ a {
     color: var(--text-muted);
 }
 
+.form-check-label {
+    font-family: var(--font-sans);
+    color: var(--text);
+}
+
+.contacts-consent-link:hover {
+    color: #408a71;
+}
+
 /* SEZIONE PROJECTS */
 
 .projects-hero {
