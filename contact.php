@@ -1,111 +1,138 @@
 <?php
-header('Content-Type: application/json; charset=UTF-8');
+
+header("Content-Type: application/json; charset=UTF-8");
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     http_response_code(405);
     echo json_encode([
-        "success" => false,
         "message" => "Metodo non consentito."
     ]);
     exit;
 }
 
-function clean_input($value) {
-    return trim(htmlspecialchars($value, ENT_QUOTES, 'UTF-8'));
+$recipientEmail = getenv("CONTACT_RECIPIENT_EMAIL") ?: "degiorgio.andrea2003@gmail.com ";
+$recaptchaSecret = getenv("RECAPTCHA_SECRET_KEY") ?: "6Le1r70sAAAAAM-LZbnCJ7j4c2_zRqaTwA8q2WIr";
+$senderEmail = getenv("CONTACT_SENDER_EMAIL") ?: "noreply@andreadegiorgio.io";
+
+if (
+    $recipientEmail === "degiorgio.andrea2003@gmail.com" ||
+    $recaptchaSecret === "6Le1r70sAAAAAM-LZbnCJ7j4c2_zRqaTwA8q2WIr"
+) {
+    http_response_code(500);
+    echo json_encode([
+        "message" => "Configurazione server incompleta. Verifica email destinatario e secret key reCAPTCHA."
+    ]);
+    exit;
 }
 
-$name = clean_input($_POST['name'] ?? '');
-$email = filter_var(trim($_POST['email'] ?? ''), FILTER_SANITIZE_EMAIL);
-$message = clean_input($_POST['message'] ?? '');
-$recaptchaResponse = $_POST['g-recaptcha-response'] ?? '';
+$payload = json_decode(file_get_contents("php://input"), true);
 
-$secretKey = '6Le1r70sAAAAAM-LZbnCJ7j4c2_zRqaTwA8q2WIr';
-
-if (empty($name) || empty($email) || empty($message)) {
+if (!is_array($payload)) {
+    http_response_code(400);
     echo json_encode([
-        "success" => false,
-        "message" => "Compila tutti i campi obbligatori."
+        "message" => "Payload non valido."
+    ]);
+    exit;
+}
+
+$name = trim((string) ($payload["name"] ?? ""));
+$email = trim((string) ($payload["email"] ?? ""));
+$message = trim((string) ($payload["message"] ?? ""));
+$recaptchaToken = trim((string) ($payload["recaptchaToken"] ?? ""));
+
+if ($name === "" || $email === "" || $message === "") {
+    http_response_code(400);
+    echo json_encode([
+        "message" => "Compila tutti i campi richiesti."
     ]);
     exit;
 }
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    http_response_code(400);
     echo json_encode([
-        "success" => false,
         "message" => "Inserisci un indirizzo email valido."
     ]);
     exit;
 }
 
-if (empty($recaptchaResponse)) {
+if ($recaptchaToken === "") {
+    http_response_code(400);
     echo json_encode([
-        "success" => false,
-        "message" => "Conferma il reCAPTCHA."
+        "message" => "Completa la verifica reCAPTCHA prima di inviare."
     ]);
     exit;
 }
 
-$verifyUrl = 'https://www.google.com/recaptcha/api/siteverify';
-$postData = http_build_query([
-    'secret' => $secretKey,
-    'response' => $recaptchaResponse,
-    'remoteip' => $_SERVER['REMOTE_ADDR'] ?? ''
+$verificationContext = stream_context_create([
+    "http" => [
+        "method" => "POST",
+        "header" => "Content-type: application/x-www-form-urlencoded\r\n",
+        "content" => http_build_query([
+            "secret" => $recaptchaSecret,
+            "response" => $recaptchaToken,
+            "remoteip" => $_SERVER["REMOTE_ADDR"] ?? ""
+        ]),
+        "timeout" => 10
+    ]
 ]);
 
-$options = [
-    'http' => [
-        'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-        'method'  => 'POST',
-        'content' => $postData,
-        'timeout' => 10
-    ]
+$verificationResponse = @file_get_contents(
+    "https://www.google.com/recaptcha/api/siteverify",
+    false,
+    $verificationContext
+);
+
+if ($verificationResponse === false) {
+    http_response_code(502);
+    echo json_encode([
+        "message" => "Verifica reCAPTCHA non raggiungibile. Riprova tra poco."
+    ]);
+    exit;
+}
+
+$verificationResult = json_decode($verificationResponse, true);
+
+if (!is_array($verificationResult) || empty($verificationResult["success"])) {
+    http_response_code(400);
+    echo json_encode([
+        "message" => "Verifica reCAPTCHA non valida. Riprova."
+    ]);
+    exit;
+}
+
+$safeName = preg_replace("/[\r\n]+/", " ", $name);
+$safeEmail = str_replace(["\r", "\n"], "", $email);
+$safeMessage = str_replace("\r", "", $message);
+
+$subject = "Nuovo messaggio dal sito andreadegiorgio.io";
+$mailBody = "Nome: {$safeName}\n";
+$mailBody .= "Email: {$safeEmail}\n\n";
+$mailBody .= "Messaggio:\n{$safeMessage}\n";
+
+$headers = [
+    "MIME-Version: 1.0",
+    "Content-Type: text/plain; charset=UTF-8",
+    "From: Andrea De Giorgio <{$senderEmail}>",
+    "Reply-To: {$safeEmail}",
+    "X-Mailer: PHP/" . phpversion()
 ];
 
-$context = stream_context_create($options);
-$verifyResponse = file_get_contents($verifyUrl, false, $context);
+$mailSent = mail(
+    $recipientEmail,
+    "=?UTF-8?B?" . base64_encode($subject) . "?=",
+    $mailBody,
+    implode("\r\n", $headers)
+);
 
-if ($verifyResponse === false) {
+if (!$mailSent) {
+    http_response_code(500);
     echo json_encode([
-        "success" => false,
-        "message" => "Errore nella verifica del reCAPTCHA."
+        "message" => "Invio email non riuscito. Verifica la configurazione del server."
     ]);
     exit;
 }
 
-$responseData = json_decode($verifyResponse, true);
-
-if (!$responseData || empty($responseData['success'])) {
-    echo json_encode([
-        "success" => true,
-        "message" => "Verifica reCAPTCHA riuscita."
-    ]);
-    exit;
-}
-
-$to = 'degiorgio.andrea2003@gmail.com';
-$subject = 'Portfolio - Nuovo messaggio dal form contatti';
-
-$emailContent = "Hai ricevuto un nuovo messaggio dal form contatti.\n\n";
-$emailContent .= "Nome: $name\n";
-$emailContent .= "Email: $email\n\n";
-$emailContent .= "Messaggio:\n$message\n";
-
-$headers = [];
-$headers[] = "From: Portfolio <noreply@andreadegiorgio.io>";
-$headers[] = "Reply-To: $email";
-$headers[] = "Content-Type: text/plain; charset=UTF-8";
-
-$mailSent = mail($to, $subject, $emailContent, implode("\r\n", $headers));
-
-if ($mailSent) {
-    echo json_encode([
-        "success" => true,
-        "message" => "Messaggio inviato con successo."
-    ]);
-} else {
-    echo json_encode([
-        "success" => false,
-        "message" => "Errore nell'invio dell'email."
-    ]);
-}
-exit;
+echo json_encode([
+    "message" => "Messaggio inviato correttamente. Ti rispondero il prima possibile."
+]);

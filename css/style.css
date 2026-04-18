@@ -31,21 +31,6 @@ body {
     color: var(--text);
 }
 
-.custom-cursor {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 1.2rem;
-    height: 1.2rem;
-    border-radius: 50%;
-    background: rgba(var(--accent-rgb), 0.6);
-    transform: translate(-50%, -50%) scale(1);
-    pointer-events: none;
-    opacity: 0;
-    z-index: 9999;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-}
-
 .custom-cursor.is-visible {
     opacity: 1;
 }
