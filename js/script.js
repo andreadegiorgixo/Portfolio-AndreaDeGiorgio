@@ -1,3 +1,27 @@
+const params = new URLSearchParams(window.location.search);
+
+const status = params.get('status');
+
+const statusEl = document.getElementById('contact-form-status');
+
+if (statusEl) {
+
+    if (status === 'success') {
+
+        statusEl.textContent = 'Messaggio inviato correttamente.';
+
+        statusEl.style.color = 'green';
+
+    } else if (status === 'error') {
+
+        statusEl.textContent = 'Si è verificato un errore durante l’invio.';
+
+        statusEl.style.color = 'red';
+
+    }
+
+}
+
 const canUseCustomCursor = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
 if (canUseCustomCursor) {
