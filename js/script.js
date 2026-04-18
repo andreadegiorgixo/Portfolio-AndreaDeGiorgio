@@ -5,6 +5,7 @@ if (form && status) {
     form.addEventListener('submit', async function (e) {
         e.preventDefault();
 
+        const submitButton = form.querySelector('button[type="submit"]');
         const formData = new FormData(form);
         const recaptchaResponse = typeof grecaptcha !== 'undefined'
             ? grecaptcha.getResponse()
@@ -16,18 +17,32 @@ if (form && status) {
         }
 
         formData.set('recaptchaToken', recaptchaResponse);
+        status.textContent = 'Invio in corso...';
+
+        if (submitButton) {
+            submitButton.disabled = true;
+        }
 
         try {
-            const response = await fetch('/contact.php', {
+            const response = await fetch(form.getAttribute('action') || '/contact.php', {
                 method: 'POST',
                 body: formData
             });
 
-            const data = await response.json();
+            const responseText = await response.text();
+            let data = null;
 
-            status.textContent = data.message || 'Si è verificato un errore imprevisto.';
+            try {
+                data = JSON.parse(responseText);
+            } catch (parseError) {
+                data = null;
+            }
 
-            if (response.ok && data.success) {
+            status.textContent = data && data.message
+                ? data.message
+                : 'Il server ha restituito una risposta non valida.';
+
+            if (response.ok && data && data.success) {
                 form.reset();
                 if (typeof grecaptcha !== 'undefined') {
                     grecaptcha.reset();
@@ -36,6 +51,10 @@ if (form && status) {
         } catch (error) {
             status.textContent = 'Si è verificato un errore imprevisto.';
             console.error(error);
+        } finally {
+            if (submitButton) {
+                submitButton.disabled = false;
+            }
         }
     });
 }

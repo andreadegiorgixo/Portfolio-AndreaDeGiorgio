@@ -809,6 +809,7 @@ a {
 
 .contacts-textarea {
     min-height: 10rem;
+    line-height: 1.6;
     resize: vertical;
 }
 

@@ -22,6 +22,41 @@ function respond(int $statusCode, string $message, bool $success = false): void
     exit;
 }
 
+function getClientIp(): string
+{
+    return trim((string) ($_SERVER["REMOTE_ADDR"] ?? ""));
+}
+
+function checkRateLimit(string $ipAddress, int $maxRequests, int $windowSeconds): bool
+{
+    if ($ipAddress === "") {
+        return true;
+    }
+
+    $rateLimitFile = sys_get_temp_dir() . "/portfolio_contact_rate_limit_" . hash("sha256", $ipAddress) . ".json";
+    $now = time();
+    $recentTimestamps = [];
+
+    if (is_file($rateLimitFile)) {
+        $storedData = json_decode((string) file_get_contents($rateLimitFile), true);
+        if (is_array($storedData)) {
+            $recentTimestamps = array_values(array_filter(
+                $storedData,
+                static fn($timestamp): bool => is_int($timestamp) && ($now - $timestamp) < $windowSeconds
+            ));
+        }
+    }
+
+    if (count($recentTimestamps) >= $maxRequests) {
+        return false;
+    }
+
+    $recentTimestamps[] = $now;
+    @file_put_contents($rateLimitFile, json_encode($recentTimestamps), LOCK_EX);
+
+    return true;
+}
+
 function postForm(string $url, array $data): ?string
 {
     $body = http_build_query($data);
@@ -74,10 +109,15 @@ $recipientEmail = trim((string) (getenv("CONTACT_RECIPIENT_EMAIL") ?: ($config["
 $recaptchaSecret = trim((string) (getenv("RECAPTCHA_SECRET_KEY") ?: ($config["recaptcha_secret_key"] ?? "")));
 $senderEmail = trim((string) (getenv("CONTACT_SENDER_EMAIL") ?: ($config["contact_sender_email"] ?? "noreply@andreadegiorgio.io")));
 
-if ($recipientEmail === "" || $recaptchaSecret === "") {
+if (
+    $recipientEmail === "" ||
+    $recaptchaSecret === "" ||
+    !filter_var($recipientEmail, FILTER_VALIDATE_EMAIL) ||
+    !filter_var($senderEmail, FILTER_VALIDATE_EMAIL)
+) {
     respond(
         500,
-        "Configurazione server incompleta. Verifica email destinatario e secret key reCAPTCHA."
+        "Configurazione server incompleta. Verifica email destinatario, sender e secret key reCAPTCHA."
     );
 }
 
@@ -92,11 +132,13 @@ if (!is_array($payload) || $payload === []) {
 }
 
 $name = trim((string) ($payload["name"] ?? ""));
+$surname = trim((string) ($payload["surname"] ?? ""));
 $email = trim((string) ($payload["email"] ?? ""));
+$contactSubject = trim((string) ($payload["subject"] ?? ""));
 $message = trim((string) ($payload["message"] ?? ""));
 $recaptchaToken = trim((string) ($payload["recaptchaToken"] ?? $payload["g-recaptcha-response"] ?? ""));
 
-if ($name === "" || $email === "" || $message === "") {
+if ($name === "" || $surname === "" || $email === "" || $contactSubject === "" || $message === "") {
     respond(400, "Compila tutti i campi richiesti.");
 }
 
@@ -104,14 +146,30 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     respond(400, "Inserisci un indirizzo email valido.");
 }
 
+if (
+    mb_strlen($name) > 80 ||
+    mb_strlen($surname) > 80 ||
+    mb_strlen($email) > 160 ||
+    mb_strlen($contactSubject) > 140 ||
+    mb_strlen($message) > 5000
+) {
+    respond(400, "Uno o piu campi superano la lunghezza consentita.");
+}
+
 if ($recaptchaToken === "") {
     respond(400, "Completa la verifica reCAPTCHA prima di inviare.");
+}
+
+$clientIp = getClientIp();
+
+if (!checkRateLimit($clientIp, 5, 600)) {
+    respond(429, "Troppi tentativi ravvicinati. Riprova tra qualche minuto.");
 }
 
 $verificationPayload = [
     "secret" => $recaptchaSecret,
     "response" => $recaptchaToken,
-    "remoteip" => $_SERVER["REMOTE_ADDR"] ?? ""
+    "remoteip" => $clientIp
 ];
 
 $verificationResponse = postForm(
@@ -137,20 +195,21 @@ if (!is_array($verificationResult) || empty($verificationResult["success"])) {
 }
 
 $safeName = preg_replace("/[\r\n]+/", " ", $name);
+$safeSurname = preg_replace("/[\r\n]+/", " ", $surname);
 $safeEmail = str_replace(["\r", "\n"], "", $email);
+$safeContactSubject = preg_replace("/[\r\n]+/", " ", $contactSubject);
 $safeMessage = str_replace("\r", "", $message);
 $serverName = preg_replace("/[^a-zA-Z0-9.-]/", "", (string) ($_SERVER["SERVER_NAME"] ?? "andreadegiorgio.io"));
 $messageIdDomain = $serverName !== "" ? $serverName : "andreadegiorgio.io";
 $timestamp = date(DATE_RFC2822);
 $messageId = sprintf("<%s@%s>", bin2hex(random_bytes(16)), $messageIdDomain);
 
-$subject = "Richiesta contatto dal sito andreadegiorgio.io";
+$subject = "Richiesta contatto: {$safeContactSubject}";
 $mailBody = "Nome: {$safeName}\n";
-$mailBody .= "Email: {$safeEmail}\n\n";
-$mailBody .= "Messaggio:\n{$safeMessage}\n";
-$mailBody .= "\n";
-$mailBody .= "IP mittente: " . ($_SERVER["REMOTE_ADDR"] ?? "non disponibile") . "\n";
-$mailBody .= "Data invio: {$timestamp}\n";
+$mailBody .= "Cognome: {$safeSurname}\n";
+$mailBody .= "Email: {$safeEmail}\n";
+$mailBody .= "Oggetto: {$safeContactSubject}\n\n";
+$mailBody .= "Corpo del messaggio:\n{$safeMessage}\n";
 
 $headers = [
     "MIME-Version: 1.0",
