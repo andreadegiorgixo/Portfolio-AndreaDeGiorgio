@@ -1,16 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
-
-@font-face {
-    font-family: "GrandSlang-Roman";
-    src:
-        local("GrandSlang Roman"),
-        local("GrandSlang-Roman"),
-        url("/fonts/GrandSlang-Roman.woff2") format("woff2"),
-        url("/fonts/GrandSlang-Roman.woff") format("woff");
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-}
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Syne:wght@700;800&display=swap');
 
 :root {
     --bg: #091413;
@@ -23,7 +11,7 @@
     --accent: #408a71;
     --accent-rgb: 64, 138, 113;
     --font-sans: "Montserrat", sans-serif;
-    --font-display: "GrandSlang-Roman", "Times New Roman", serif;
+    --font-display: "Syne", "Montserrat", sans-serif;
 }
 
 *,
