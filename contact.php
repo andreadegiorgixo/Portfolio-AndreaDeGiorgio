@@ -22,6 +22,50 @@ function respond(int $statusCode, string $message, bool $success = false): void
     exit;
 }
 
+function postForm(string $url, array $data): ?string
+{
+    $body = http_build_query($data);
+
+    if (function_exists("curl_init")) {
+        $ch = curl_init($url);
+
+        curl_setopt_array($ch, [
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => $body,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_TIMEOUT => 10,
+            CURLOPT_HTTPHEADER => [
+                "Content-Type: application/x-www-form-urlencoded"
+            ]
+        ]);
+
+        $response = curl_exec($ch);
+        $httpCode = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        if (is_string($response) && $response !== "" && $httpCode >= 200 && $httpCode < 300) {
+            return $response;
+        }
+    }
+
+    $context = stream_context_create([
+        "http" => [
+            "method" => "POST",
+            "header" => "Content-Type: application/x-www-form-urlencoded\r\n",
+            "content" => $body,
+            "timeout" => 10
+        ],
+        "ssl" => [
+            "verify_peer" => true,
+            "verify_peer_name" => true
+        ]
+    ]);
+
+    $response = @file_get_contents($url, false, $context);
+
+    return is_string($response) && $response !== "" ? $response : null;
+}
+
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     respond(405, "Metodo non consentito.");
 }
@@ -64,26 +108,25 @@ if ($recaptchaToken === "") {
     respond(400, "Completa la verifica reCAPTCHA prima di inviare.");
 }
 
-$verificationContext = stream_context_create([
-    "http" => [
-        "method" => "POST",
-        "header" => "Content-type: application/x-www-form-urlencoded\r\n",
-        "content" => http_build_query([
-            "secret" => $recaptchaSecret,
-            "response" => $recaptchaToken,
-            "remoteip" => $_SERVER["REMOTE_ADDR"] ?? ""
-        ]),
-        "timeout" => 10
-    ]
-]);
+$verificationPayload = [
+    "secret" => $recaptchaSecret,
+    "response" => $recaptchaToken,
+    "remoteip" => $_SERVER["REMOTE_ADDR"] ?? ""
+];
 
-$verificationResponse = @file_get_contents(
+$verificationResponse = postForm(
     "https://www.google.com/recaptcha/api/siteverify",
-    false,
-    $verificationContext
+    $verificationPayload
 );
 
-if ($verificationResponse === false) {
+if ($verificationResponse === null) {
+    $verificationResponse = postForm(
+        "https://www.recaptcha.net/recaptcha/api/siteverify",
+        $verificationPayload
+    );
+}
+
+if ($verificationResponse === null) {
     respond(502, "Verifica reCAPTCHA non raggiungibile. Riprova tra poco.");
 }
 
