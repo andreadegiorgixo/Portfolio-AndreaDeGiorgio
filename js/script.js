@@ -79,7 +79,7 @@ if (contactForm) {
         updateStatus("Invio del messaggio in corso...", "pending");
 
         try {
-            const response = await fetch("/.netlify/functions/contact", {
+            const response = await fetch("/contact.php", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
