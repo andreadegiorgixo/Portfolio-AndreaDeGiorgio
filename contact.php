@@ -19,7 +19,7 @@ $email = filter_var(trim($_POST['email'] ?? ''), FILTER_SANITIZE_EMAIL);
 $message = clean_input($_POST['message'] ?? '');
 $recaptchaResponse = $_POST['g-recaptcha-response'] ?? '';
 
-$secretKey = 'LA_TUA_SECRET_KEY';
+$secretKey = '6Le1r70sAAAAAM-LZbnCJ7j4c2_zRqaTwA8q2WIr';
 
 if (empty($name) || empty($email) || empty($message)) {
     echo json_encode([
