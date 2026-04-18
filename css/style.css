@@ -1,5 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
+@font-face {
+    font-family: "GrandSlang-Roman";
+    src:
+        local("GrandSlang Roman"),
+        local("GrandSlang-Roman"),
+        url("/fonts/GrandSlang-Roman.woff2") format("woff2"),
+        url("/fonts/GrandSlang-Roman.woff") format("woff");
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+}
+
 :root {
     --bg: #091413;
     --panel: rgba(12, 27, 25, 0.88);
