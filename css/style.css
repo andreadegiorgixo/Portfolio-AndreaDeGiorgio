@@ -31,15 +31,24 @@ body {
     color: var(--text);
 }
 
-@media (hover: hover) and (pointer: fine) {
-    body,
-    a,
-    button,
-    input,
-    textarea,
-    select {
-        cursor: default;
-    }
+body {
+    cursor: auto;
+}
+
+a,
+button,
+[role="button"],
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+label[for],
+select {
+    cursor: pointer;
+}
+
+input,
+textarea {
+    cursor: text;
 }
 
 a {
