@@ -1,8 +1,13 @@
 <?php
+header('Content-Type: application/json; charset=UTF-8');
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     http_response_code(405);
-    exit("Metodo non consentito.");
+    echo json_encode([
+        "success" => false,
+        "message" => "Metodo non consentito."
+    ]);
+    exit;
 }
 
 function clean_input($value) {
@@ -14,23 +19,32 @@ $email = filter_var(trim($_POST['email'] ?? ''), FILTER_SANITIZE_EMAIL);
 $message = clean_input($_POST['message'] ?? '');
 $recaptchaResponse = $_POST['g-recaptcha-response'] ?? '';
 
-// INSERISCI QUI LA TUA SECRET KEY DI GOOGLE
-$secretKey = '6Le1r70sAAAAAM-LZbnCJ7j4c2_zRqaTwA8q2WIr';
+$secretKey = 'LA_TUA_SECRET_KEY';
 
-// Validazione campi
 if (empty($name) || empty($email) || empty($message)) {
-    exit("Compila tutti i campi obbligatori.");
+    echo json_encode([
+        "success" => false,
+        "message" => "Compila tutti i campi obbligatori."
+    ]);
+    exit;
 }
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    exit("Inserisci un indirizzo email valido.");
+    echo json_encode([
+        "success" => false,
+        "message" => "Inserisci un indirizzo email valido."
+    ]);
+    exit;
 }
 
 if (empty($recaptchaResponse)) {
-    exit("Conferma il reCAPTCHA.");
+    echo json_encode([
+        "success" => false,
+        "message" => "Conferma il reCAPTCHA."
+    ]);
+    exit;
 }
 
-// Verifica reCAPTCHA con Google
 $verifyUrl = 'https://www.google.com/recaptcha/api/siteverify';
 $postData = http_build_query([
     'secret' => $secretKey,
@@ -51,16 +65,23 @@ $context = stream_context_create($options);
 $verifyResponse = file_get_contents($verifyUrl, false, $context);
 
 if ($verifyResponse === false) {
-    exit("Errore nella verifica del reCAPTCHA.");
+    echo json_encode([
+        "success" => false,
+        "message" => "Errore nella verifica del reCAPTCHA."
+    ]);
+    exit;
 }
 
 $responseData = json_decode($verifyResponse, true);
 
 if (!$responseData || empty($responseData['success'])) {
-    exit("Verifica reCAPTCHA fallita.");
+    echo json_encode([
+        "success" => false,
+        "message" => "Verifica reCAPTCHA fallita."
+    ]);
+    exit;
 }
 
-// EMAIL DESTINATARIA: metti la tua email Aruba o quella che vuoi usare
 $to = 'degiorgio.andrea2003@gmail.com';
 $subject = 'Portfolio - Nuovo messaggio dal form contatti';
 
@@ -77,9 +98,14 @@ $headers[] = "Content-Type: text/plain; charset=UTF-8";
 $mailSent = mail($to, $subject, $emailContent, implode("\r\n", $headers));
 
 if ($mailSent) {
-    header("Location: /contacts.html?status=success");
-    exit;
+    echo json_encode([
+        "success" => true,
+        "message" => "Messaggio inviato con successo."
+    ]);
 } else {
-    header("Location: /contacts.html?status=error");
-    exit;
+    echo json_encode([
+        "success" => false,
+        "message" => "Errore nell'invio dell'email."
+    ]);
 }
+exit;
