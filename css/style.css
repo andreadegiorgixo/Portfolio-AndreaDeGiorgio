@@ -319,6 +319,10 @@ a {
 }
 
 @media (max-width: 575.98px) {
+    .hero-container {
+        min-height: auto;
+        align-items: flex-start !important;
+    }
 
     .hero-intro {
         gap: 1.5rem;
