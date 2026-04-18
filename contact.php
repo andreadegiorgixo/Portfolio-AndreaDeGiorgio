@@ -139,17 +139,29 @@ if (!is_array($verificationResult) || empty($verificationResult["success"])) {
 $safeName = preg_replace("/[\r\n]+/", " ", $name);
 $safeEmail = str_replace(["\r", "\n"], "", $email);
 $safeMessage = str_replace("\r", "", $message);
+$serverName = preg_replace("/[^a-zA-Z0-9.-]/", "", (string) ($_SERVER["SERVER_NAME"] ?? "andreadegiorgio.io"));
+$messageIdDomain = $serverName !== "" ? $serverName : "andreadegiorgio.io";
+$timestamp = date(DATE_RFC2822);
+$messageId = sprintf("<%s@%s>", bin2hex(random_bytes(16)), $messageIdDomain);
 
-$subject = "Nuovo messaggio dal sito andreadegiorgio.io";
+$subject = "Richiesta contatto dal sito andreadegiorgio.io";
 $mailBody = "Nome: {$safeName}\n";
 $mailBody .= "Email: {$safeEmail}\n\n";
 $mailBody .= "Messaggio:\n{$safeMessage}\n";
+$mailBody .= "\n";
+$mailBody .= "IP mittente: " . ($_SERVER["REMOTE_ADDR"] ?? "non disponibile") . "\n";
+$mailBody .= "Data invio: {$timestamp}\n";
 
 $headers = [
     "MIME-Version: 1.0",
     "Content-Type: text/plain; charset=UTF-8",
-    "From: Andrea De Giorgio <{$senderEmail}>",
+    "Content-Transfer-Encoding: 8bit",
+    "From: Portfolio Contact <{$senderEmail}>",
+    "Sender: Portfolio Contact <{$senderEmail}>",
     "Reply-To: {$safeEmail}",
+    "Date: {$timestamp}",
+    "Message-ID: {$messageId}",
+    "X-Auto-Response-Suppress: All",
     "X-Mailer: PHP/" . phpversion()
 ];
 
