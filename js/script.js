@@ -38,9 +38,17 @@ if (form && status) {
                 data = null;
             }
 
-            status.textContent = data && data.message
-                ? data.message
-                : 'Il server ha restituito una risposta non valida.';
+            if (data && data.message) {
+                status.textContent = data.message;
+            } else {
+                const compactResponse = responseText
+                    ? responseText.replace(/\s+/g, ' ').trim().slice(0, 180)
+                    : '';
+
+                status.textContent = compactResponse
+                    ? `Risposta server non valida: ${compactResponse}`
+                    : 'Il server ha restituito una risposta non valida.';
+            }
 
             if (response.ok && data && data.success) {
                 form.reset();

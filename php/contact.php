@@ -1,8 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
-function send_json_response(int $statusCode, array $payload): void
+function send_json_response($statusCode, $payload)
 {
     while (ob_get_level() > 0) {
         ob_end_clean();
@@ -15,45 +13,45 @@ function send_json_response(int $statusCode, array $payload): void
     exit;
 }
 
-function post_string(string $key): string
+function post_string($key)
 {
-    $value = $_POST[$key] ?? '';
+    $value = isset($_POST[$key]) ? $_POST[$key] : '';
 
     return is_string($value) ? trim($value) : '';
 }
 
-function verify_recaptcha_token(string $secretKey, string $token): bool
+function verify_recaptcha_token($secretKey, $token)
 {
     $endpoint = 'https://www.google.com/recaptcha/api/siteverify';
-    $payload = http_build_query([
+    $payload = http_build_query(array(
         'secret' => $secretKey,
         'response' => $token,
-        'remoteip' => $_SERVER['REMOTE_ADDR'] ?? '',
-    ]);
+        'remoteip' => isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '',
+    ));
 
     $responseBody = false;
 
     if (function_exists('curl_init')) {
         $ch = curl_init($endpoint);
 
-        curl_setopt_array($ch, [
+        curl_setopt_array($ch, array(
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_POST => true,
             CURLOPT_POSTFIELDS => $payload,
             CURLOPT_TIMEOUT => 10,
-        ]);
+        ));
 
         $responseBody = curl_exec($ch);
         curl_close($ch);
     } else {
-        $context = stream_context_create([
-            'http' => [
+        $context = stream_context_create(array(
+            'http' => array(
                 'method' => 'POST',
                 'header' => "Content-Type: application/x-www-form-urlencoded\r\n",
                 'content' => $payload,
                 'timeout' => 10,
-            ],
-        ]);
+            ),
+        ));
 
         $responseBody = @file_get_contents($endpoint, false, $context);
     }
@@ -69,33 +67,33 @@ function verify_recaptcha_token(string $secretKey, string $token): bool
 
 ob_start();
 
-if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'POST') {
-    send_json_response(405, [
+if ((isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : 'GET') !== 'POST') {
+    send_json_response(405, array(
         'success' => false,
         'message' => 'Metodo non consentito.',
-    ]);
+    ));
 }
 
 $configPath = __DIR__ . '/config.php';
 
 if (!is_file($configPath)) {
-    send_json_response(500, [
+    send_json_response(500, array(
         'success' => false,
         'message' => 'Configurazione server mancante.',
-    ]);
+    ));
 }
 
 $config = require $configPath;
 
-$recipientEmail = trim((string) ($config['contact_recipient_email'] ?? ''));
-$senderEmail = trim((string) ($config['contact_sender_email'] ?? ''));
-$recaptchaSecretKey = trim((string) ($config['recaptcha_secret_key'] ?? ''));
+$recipientEmail = trim(isset($config['contact_recipient_email']) ? (string) $config['contact_recipient_email'] : '');
+$senderEmail = trim(isset($config['contact_sender_email']) ? (string) $config['contact_sender_email'] : '');
+$recaptchaSecretKey = trim(isset($config['recaptcha_secret_key']) ? (string) $config['recaptcha_secret_key'] : '');
 
 if ($recipientEmail === '' || $senderEmail === '' || $recaptchaSecretKey === '') {
-    send_json_response(500, [
+    send_json_response(500, array(
         'success' => false,
         'message' => 'Configurazione email o reCAPTCHA non valida.',
-    ]);
+    ));
 }
 
 $name = post_string('name');
@@ -113,29 +111,29 @@ if (
     $message === '' ||
     $recaptchaToken === ''
 ) {
-    send_json_response(422, [
+    send_json_response(422, array(
         'success' => false,
         'message' => 'Compila tutti i campi richiesti e completa il reCAPTCHA.',
-    ]);
+    ));
 }
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    send_json_response(422, [
+    send_json_response(422, array(
         'success' => false,
         'message' => 'Inserisci un indirizzo email valido.',
-    ]);
+    ));
 }
 
 if (!verify_recaptcha_token($recaptchaSecretKey, $recaptchaToken)) {
-    send_json_response(422, [
+    send_json_response(422, array(
         'success' => false,
         'message' => 'Verifica reCAPTCHA non valida. Riprova.',
-    ]);
+    ));
 }
 
 $fullName = trim($name . ' ' . $surname);
 $mailSubject = '[Portfolio] ' . $subject;
-$mailBody = implode("\n", [
+$mailBody = implode("\n", array(
     'Nuovo messaggio dal form contatti',
     '',
     'Nome: ' . $fullName,
@@ -144,25 +142,25 @@ $mailBody = implode("\n", [
     '',
     'Messaggio:',
     $message,
-]);
+));
 
-$headers = [
+$headers = array(
     'MIME-Version: 1.0',
     'Content-Type: text/plain; charset=UTF-8',
     'From: Andrea De Giorgio <' . $senderEmail . '>',
     'Reply-To: ' . $fullName . ' <' . $email . '>',
-];
+);
 
 $mailSent = @mail($recipientEmail, $mailSubject, $mailBody, implode("\r\n", $headers));
 
 if (!$mailSent) {
-    send_json_response(500, [
+    send_json_response(500, array(
         'success' => false,
         'message' => 'Invio email non riuscito. Controlla la configurazione del server.',
-    ]);
+    ));
 }
 
-send_json_response(200, [
+send_json_response(200, array(
     'success' => true,
     'message' => 'Messaggio inviato con successo.',
-]);
+));
