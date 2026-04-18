@@ -12,6 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
 
 $recipientEmail = getenv("CONTACT_RECIPIENT_EMAIL") ?: "degiorgio.andrea2003@gmail.com ";
 $recaptchaSecret = getenv("RECAPTCHA_SECRET_KEY") ?: "6Le1r70sAAAAAM-LZbnCJ7j4c2_zRqaTwA8q2WIr";
+$senderEmail = getenv("CONTACT_SENDER_EMAIL") ?: "noreply@andreadegiorgio.io";
 
 if (
     $recipientEmail === "degiorgio.andrea2003@gmail.com" ||
@@ -108,6 +109,14 @@ $subject = "Nuovo messaggio dal sito andreadegiorgio.io";
 $mailBody = "Nome: {$safeName}\n";
 $mailBody .= "Email: {$safeEmail}\n\n";
 $mailBody .= "Messaggio:\n{$safeMessage}\n";
+
+$headers = [
+    "MIME-Version: 1.0",
+    "Content-Type: text/plain; charset=UTF-8",
+    "From: Andrea De Giorgio <{$senderEmail}>",
+    "Reply-To: {$safeEmail}",
+    "X-Mailer: PHP/" . phpversion()
+];
 
 $mailSent = mail(
     $recipientEmail,
