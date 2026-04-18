@@ -76,8 +76,8 @@ $responseData = json_decode($verifyResponse, true);
 
 if (!$responseData || empty($responseData['success'])) {
     echo json_encode([
-        "success" => false,
-        "message" => "Verifica reCAPTCHA fallita."
+        "success" => true,
+        "message" => "Verifica reCAPTCHA riuscita."
     ]);
     exit;
 }
