@@ -1083,6 +1083,31 @@ a {
     color: #408a71;
 }
 
+@media (min-width: 768px) and (max-width: 1199.98px) {
+    .contacts-card {
+        padding: 2.5rem !important;
+    }
+
+    .contacts-title {
+        max-width: 11ch;
+        font-size: clamp(3.2rem, 6.2vw, 4.5rem);
+    }
+
+    .contacts-form-title {
+        max-width: 10ch;
+        font-size: clamp(2.6rem, 5.4vw, 4rem);
+    }
+
+    .contacts-intro {
+        max-width: 46rem;
+        font-size: 1.02rem;
+    }
+
+    .contact-item {
+        min-height: 11.5rem;
+    }
+}
+
 /* SEZIONE PROJECTS */
 
 .projects-hero {
