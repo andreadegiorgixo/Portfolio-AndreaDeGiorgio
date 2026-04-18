@@ -6,10 +6,21 @@ if (form && status) {
         e.preventDefault();
 
         const submitButton = form.querySelector('button[type="submit"]');
+        const consentCheckbox = document.getElementById('contact-consent');
         const formData = new FormData(form);
         const recaptchaResponse = typeof grecaptcha !== 'undefined'
             ? grecaptcha.getResponse()
             : '';
+
+        if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+        }
+
+        if (!consentCheckbox || !consentCheckbox.checked) {
+            status.textContent = 'Devi acconsentire al trattamento dei dati personali per inviare il messaggio.';
+            return;
+        }
 
         if (!recaptchaResponse) {
             status.textContent = 'Completa la verifica reCAPTCHA prima di inviare.';

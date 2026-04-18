@@ -101,6 +101,7 @@ $surname = post_string('surname');
 $email = post_string('email');
 $subject = post_string('subject');
 $message = post_string('message');
+$consent = post_string('consent');
 $recaptchaToken = post_string('recaptchaToken');
 
 if (
@@ -109,11 +110,19 @@ if (
     $email === '' ||
     $subject === '' ||
     $message === '' ||
+    $consent === '' ||
     $recaptchaToken === ''
 ) {
     send_json_response(422, array(
         'success' => false,
-        'message' => 'Compila tutti i campi richiesti e completa il reCAPTCHA.',
+        'message' => 'Compila tutti i campi richiesti, conferma il consenso privacy e completa il reCAPTCHA.',
+    ));
+}
+
+if ($consent !== '1') {
+    send_json_response(422, array(
+        'success' => false,
+        'message' => 'Devi acconsentire al trattamento dei dati personali per inviare il messaggio.',
     ));
 }
 
