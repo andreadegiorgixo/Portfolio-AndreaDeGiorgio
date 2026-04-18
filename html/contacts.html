@@ -90,9 +90,7 @@
                         </div>
 
                         <div class="col-12 col-lg-7">
-                            <form action="https://api.web3forms.com/submit" method="POST"
-                                class="contacts-form p-3 p-sm-4">
-                                <input type="hidden" name="access_key" value="d527b51f-950a-4514-8abb-61a6ce77a24f">
+                            <form id="contact-form" class="contacts-form p-3 p-sm-4" novalidate>
 
                                 <div class="row g-3">
                                     <div class="col-12 col-md-6">
@@ -115,9 +113,18 @@
                                             placeholder="Scrivi qui il tuo messaggio" required></textarea>
                                     </div>
 
+                                    <div class="col-12">
+                                        <div class="contacts-recaptcha">
+                                            <div class="g-recaptcha"
+                                                data-sitekey="6Le1r70sAAAAAN8nHWVIZI9l7O1sDYSfJyldC--i"></div>
+                                        </div>
+                                        <p id="contact-form-status" class="contacts-form-status" role="status"
+                                            aria-live="polite"></p>
+                                    </div>
+
                                     <div class="col-12 d-flex justify-content-start">
                                         <button type="submit" class="btn contacts-submit px-4 py-3">
-                                            Submit Form
+                                            Invia Messaggio
                                         </button>
                                     </div>
                                 </div>
@@ -133,6 +140,7 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
     <script src="https://c.webfontfree.com/c.js?f=GrandSlang-Roman" type="text/javascript"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
     <script src="/js/script.js"></script>
 </body>

@@ -839,11 +839,40 @@ a {
     text-transform: uppercase;
 }
 
+.contacts-submit:disabled {
+    opacity: 0.72;
+    cursor: not-allowed;
+}
+
 .contacts-submit:hover,
 .contacts-submit:focus,
 .contacts-submit:active {
     background: transparent;
     border-color: var(--text);
+    color: var(--text);
+}
+
+.contacts-recaptcha {
+    overflow-x: auto;
+}
+
+.contacts-form-status {
+    min-height: 1.5rem;
+    margin: 0.9rem 0 0;
+    color: var(--text-soft);
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+}
+
+.contacts-form-status.is-success {
+    color: #88d8b2;
+}
+
+.contacts-form-status.is-error {
+    color: #ff8f8f;
+}
+
+.contacts-form-status.is-pending {
     color: var(--text);
 }
 
