@@ -610,6 +610,10 @@ a {
 }
 
 @media (max-width: 575.98px) {
+    .framer-1iemjr1 {
+        display: none;
+    }
+
     .hero-container {
         min-height: auto;
         align-items: flex-start !important;
