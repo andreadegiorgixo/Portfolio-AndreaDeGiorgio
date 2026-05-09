@@ -96,7 +96,7 @@
                         </div>
 
                         <div class="col-12 col-xl-7">
-                            <form id="contact-form" class="contacts-form p-3 p-sm-4" action="/php/contact.php" method="POST"
+                            <form id="contact-form" class="contacts-form p-3 p-sm-4" action="/php/contact.php" method="POST" enctype="multipart/form-data"
                                 novalidate>
 
                                 <div class="row g-3">
@@ -133,6 +133,19 @@
                                             id="contact-message" name="message" rows="6"
                                             placeholder="Scrivi qui il corpo del messaggio" maxlength="5000"
                                             required></textarea>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="contact-attachment" class="form-label contact-label mb-2">Allegato</label>
+                                        <div class="contacts-file-picker">
+                                            <input type="file" class="contacts-file-input" id="contact-attachment"
+                                                name="attachment" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg,.txt">
+                                            <label for="contact-attachment" class="contacts-file-button">
+                                                Scegli Allegato
+                                            </label>
+                                            <span class="contacts-file-name" id="contact-attachment-name">Nessun file selezionato</span>
+                                        </div>
+                                        <small class="contact-label d-block mt-2">Facoltativo. Max 5 MB. Formati: PDF, DOC, DOCX, PNG, JPG, JPEG, TXT.</small>
                                     </div>
 
                                     <div class="col-12 pt-4">

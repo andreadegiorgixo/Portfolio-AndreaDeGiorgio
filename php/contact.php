@@ -37,6 +37,7 @@ $subject = normalizeInput($_POST['subject'] ?? '');
 $message = normalizeInput($_POST['message'] ?? '');
 $recaptchaToken = trim((string)($_POST['recaptchaToken'] ?? ''));
 $consent = (string)($_POST['consent'] ?? '');
+$attachment = $_FILES['attachment'] ?? null;
 
 if (
     $name === '' ||
@@ -80,6 +81,8 @@ if (containsHeaderInjection([$name, $surname, $email, $subject])) {
     respond(422, false, 'I dati inseriti contengono caratteri non validi.');
 }
 
+$attachmentData = validateAttachment($attachment);
+
 $recaptchaResult = verifyRecaptcha($recaptchaSecret, $recaptchaToken);
 
 if (!$recaptchaResult['success']) {
@@ -101,23 +104,19 @@ $bodyLines = [
     'Cognome: ' . $surname,
     'Email: ' . $email,
     'Oggetto: ' . $safeSubject,
+    'Allegato: ' . ($attachmentData !== null ? $attachmentData['name'] : 'Nessuno'),
     '',
     'Messaggio:',
     $message,
 ];
 
 $mailBody = implode("\n", $bodyLines);
+$encodedSubject = encodeMimeHeader('[Portfolio] ' . $safeSubject);
+$headers = buildMailHeaders($senderEmail, $safeName, $email, $attachmentData);
+$payload = buildMailPayload($mailBody, $attachmentData, $headers['boundary'] ?? null);
+$mailHeaderLines = $headers['lines'];
 
-$headers = [
-    'MIME-Version: 1.0',
-    'Content-Type: text/plain; charset=UTF-8',
-    'From: Andrea De Giorgio Portfolio <' . $senderEmail . '>',
-    'Reply-To: ' . ($safeName !== '' ? $safeName . ' <' . $email . '>' : $email),
-    'X-Mailer: PHP/' . PHP_VERSION,
-];
-
-$encodedSubject = mb_encode_mimeheader('[Portfolio] ' . $safeSubject, 'UTF-8');
-$mailSent = mail($recipientEmail, $encodedSubject, $mailBody, implode("\r\n", $headers));
+$mailSent = mail($recipientEmail, $encodedSubject, $payload, implode("\r\n", $mailHeaderLines));
 
 if (!$mailSent) {
     respond(500, false, 'Invio non riuscito. Controlla la configurazione del server email.');
@@ -151,6 +150,151 @@ function textLength(string $value): int
     }
 
     return strlen($value);
+}
+
+function validateAttachment(mixed $attachment): ?array
+{
+    if (!is_array($attachment) || !isset($attachment['error'])) {
+        return null;
+    }
+
+    if ((int)$attachment['error'] === UPLOAD_ERR_NO_FILE) {
+        return null;
+    }
+
+    if ((int)$attachment['error'] !== UPLOAD_ERR_OK) {
+        respond(422, false, 'Caricamento allegato non riuscito.');
+    }
+
+    $tmpPath = (string)($attachment['tmp_name'] ?? '');
+    $originalName = sanitizeFileName((string)($attachment['name'] ?? 'allegato'));
+    $size = (int)($attachment['size'] ?? 0);
+
+    if ($tmpPath === '' || !is_uploaded_file($tmpPath)) {
+        respond(422, false, 'Allegato non valido.');
+    }
+
+    if ($size <= 0) {
+        respond(422, false, 'L\'allegato e vuoto.');
+    }
+
+    if ($size > 5 * 1024 * 1024) {
+        respond(422, false, 'L\'allegato supera il limite di 5 MB.');
+    }
+
+    $allowedMimeTypes = [
+        'application/pdf',
+        'application/msword',
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        'image/jpeg',
+        'image/png',
+        'text/plain',
+    ];
+
+    $mimeType = detectMimeType($tmpPath);
+
+    if (!in_array($mimeType, $allowedMimeTypes, true)) {
+        respond(422, false, 'Formato allegato non consentito.');
+    }
+
+    $content = file_get_contents($tmpPath);
+
+    if ($content === false) {
+        respond(500, false, 'Impossibile leggere l\'allegato.');
+    }
+
+    return [
+        'name' => $originalName,
+        'mime' => $mimeType,
+        'content' => chunk_split(base64_encode($content)),
+    ];
+}
+
+function sanitizeFileName(string $name): string
+{
+    $name = basename($name);
+    $name = preg_replace('/[^A-Za-z0-9._-]/', '_', $name);
+    $name = trim((string)$name, '._');
+
+    return $name !== '' ? $name : 'allegato';
+}
+
+function detectMimeType(string $path): string
+{
+    if (function_exists('finfo_open')) {
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+
+        if ($finfo !== false) {
+            $mimeType = finfo_file($finfo, $path);
+            finfo_close($finfo);
+
+            if (is_string($mimeType) && $mimeType !== '') {
+                return $mimeType;
+            }
+        }
+    }
+
+    return 'application/octet-stream';
+}
+
+function buildMailHeaders(string $senderEmail, string $safeName, string $email, ?array $attachmentData): array
+{
+    $headers = [
+        'MIME-Version: 1.0',
+        'From: Andrea De Giorgio Portfolio <' . $senderEmail . '>',
+        'Reply-To: ' . ($safeName !== '' ? $safeName . ' <' . $email . '>' : $email),
+        'X-Mailer: PHP/' . PHP_VERSION,
+    ];
+
+    if ($attachmentData === null) {
+        $headers[] = 'Content-Type: text/plain; charset=UTF-8';
+
+        return [
+            'lines' => $headers,
+        ];
+    }
+
+    $boundary = 'portfolio_' . bin2hex(random_bytes(12));
+    $headers[] = 'Content-Type: multipart/mixed; boundary="' . $boundary . '"';
+
+    return [
+        'lines' => $headers,
+        'boundary' => $boundary,
+    ];
+}
+
+function buildMailPayload(string $mailBody, ?array $attachmentData, ?string $boundary): string
+{
+    if ($attachmentData === null || $boundary === null) {
+        return $mailBody;
+    }
+
+    $parts = [
+        '--' . $boundary,
+        'Content-Type: text/plain; charset=UTF-8',
+        'Content-Transfer-Encoding: 8bit',
+        '',
+        $mailBody,
+        '',
+        '--' . $boundary,
+        'Content-Type: ' . $attachmentData['mime'] . '; name="' . $attachmentData['name'] . '"',
+        'Content-Transfer-Encoding: base64',
+        'Content-Disposition: attachment; filename="' . $attachmentData['name'] . '"',
+        '',
+        $attachmentData['content'],
+        '--' . $boundary . '--',
+    ];
+
+    return implode("\r\n", $parts);
+}
+
+function encodeMimeHeader(string $value): string
+{
+    if (function_exists('mb_encode_mimeheader')) {
+        return mb_encode_mimeheader($value, 'UTF-8');
+    }
+
+    return '=?UTF-8?B?' . base64_encode($value) . '?=';
 }
 
 function verifyRecaptcha(string $secret, string $token): array

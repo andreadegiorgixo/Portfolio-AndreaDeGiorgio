@@ -151,6 +151,19 @@ if (document.readyState === 'loading') {
 
 const form = document.getElementById('contact-form');
 const status = document.getElementById('contact-form-status');
+const maxAttachmentSize = 5 * 1024 * 1024;
+const attachmentInput = document.getElementById('contact-attachment');
+const attachmentName = document.getElementById('contact-attachment-name');
+
+if (attachmentInput && attachmentName) {
+    attachmentInput.addEventListener('change', function () {
+        const selectedFile = attachmentInput.files && attachmentInput.files[0]
+            ? attachmentInput.files[0].name
+            : 'Nessun file selezionato';
+
+        attachmentName.textContent = selectedFile;
+    });
+}
 
 if (form && status) {
     form.addEventListener('submit', async function (e) {
@@ -175,6 +188,16 @@ if (form && status) {
 
         if (!recaptchaResponse) {
             status.textContent = 'Completa la verifica reCAPTCHA prima di inviare.';
+            return;
+        }
+
+        if (
+            attachmentInput &&
+            attachmentInput.files &&
+            attachmentInput.files[0] &&
+            attachmentInput.files[0].size > maxAttachmentSize
+        ) {
+            status.textContent = 'L\'allegato supera il limite di 5 MB.';
             return;
         }
 
@@ -214,6 +237,9 @@ if (form && status) {
 
             if (response.ok && data && data.success) {
                 form.reset();
+                if (attachmentName) {
+                    attachmentName.textContent = 'Nessun file selezionato';
+                }
                 if (typeof grecaptcha !== 'undefined') {
                     grecaptcha.reset();
                 }
