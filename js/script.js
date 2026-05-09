@@ -186,7 +186,7 @@ if (form && status) {
         }
 
         try {
-            const response = await fetch(form.getAttribute('action') || '/contact.php', {
+            const response = await fetch(form.getAttribute('action') || '/php/contact.php', {
                 method: 'POST',
                 body: formData
             });
