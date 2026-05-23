@@ -1,5 +1,5 @@
 const themeStorageKey = 'portfolio_theme';
-const defaultTheme = 'dark';
+const defaultTheme = 'light';
 
 function getStoredTheme() {
     try {
@@ -18,7 +18,7 @@ function setStoredTheme(theme) {
 }
 
 function applyTheme(theme) {
-    const normalizedTheme = theme === 'light' ? 'light' : defaultTheme;
+    const normalizedTheme = (theme === 'light' || theme === 'dark') ? theme : defaultTheme;
     document.documentElement.setAttribute('data-theme', normalizedTheme);
     document.documentElement.style.colorScheme = normalizedTheme;
 
