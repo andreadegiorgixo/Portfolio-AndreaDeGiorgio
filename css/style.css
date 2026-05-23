@@ -553,7 +553,7 @@ a {
 }
 
 .link a:hover {
-    color: var(--accent);
+    color: var(--text);
     letter-spacing: 0.03em;
     transform: translateX(-0.08em) skew(-12deg);
 }
