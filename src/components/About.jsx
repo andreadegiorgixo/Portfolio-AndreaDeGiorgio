@@ -4,12 +4,6 @@ import aboutPhoto from "../assets/profile-about.jpg";
 import { useLanguage } from "../context/LanguageContext";
 
 const icons = [Briefcase, MapPin, Languages, Sparkles];
-const factColors = [
-  "text-brand-600 dark:text-brand-400",
-  "text-accent-600 dark:text-accent-400",
-  "text-brand-500 dark:text-brand-300",
-  "text-accent-500 dark:text-accent-300",
-];
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -33,12 +27,13 @@ export default function About() {
           viewport={{ once: true, amount: 0.4 }}
           className="text-center"
         >
-          <span className="text-sm font-bold uppercase tracking-widest text-brand-600 dark:text-brand-400">
+          <span className="text-sm font-bold uppercase tracking-widest text-ink-muted">
             {t.about.eyebrow}
           </span>
-          <h2 className="mt-3 font-display text-4xl font-bold text-ink sm:text-5xl">
+          <h2 className="mt-3 font-display text-4xl font-bold uppercase text-ink sm:text-5xl">
             {t.about.title}
           </h2>
+          <div className="mx-auto mt-6 h-px w-16 bg-ink" />
         </motion.div>
 
         <div className="mt-16 grid items-center gap-12 md:grid-cols-[0.85fr_1.15fr]">
@@ -47,7 +42,7 @@ export default function About() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.4 }}
-            className="mx-auto w-full max-w-xs overflow-hidden rounded-[2.5rem] shadow-brand"
+            className="mx-auto w-full max-w-xs overflow-hidden border border-ink/15 bg-surface-alt"
           >
             <img
               src={aboutPhoto}
@@ -65,17 +60,17 @@ export default function About() {
             className="space-y-4 text-lg leading-relaxed text-ink-soft"
           >
             <p>
-              <strong className="font-display italic font-semibold text-brand-600 dark:text-brand-400">
+              <strong className="font-display italic font-semibold text-ink">
                 {t.about.role}
               </strong>
               {t.about.introEnd}{" "}
-              <strong className="font-display italic font-semibold text-accent-600 dark:text-accent-400">
+              <strong className="font-display italic font-semibold text-ink">
                 {t.about.stack}
               </strong>
               {t.about.afterStack}
             </p>
             <p>{t.about.paragraph}</p>
-            <span className="inline-flex items-center rounded-full bg-brand-100 px-4 py-1.5 font-display text-sm font-semibold italic text-brand-700 dark:bg-brand-900/40 dark:text-brand-300">
+            <span className="inline-flex items-center border border-ink/20 px-4 py-1.5 font-display text-sm font-semibold italic text-ink">
               {t.about.badge}
             </span>
           </motion.div>
@@ -93,9 +88,9 @@ export default function About() {
                 viewport={{ once: true, amount: 0.4 }}
                 custom={i}
                 whileHover={{ y: -6 }}
-                className="rounded-3xl border border-border bg-surface-card p-5 text-center shadow-brand-sm backdrop-blur transition-shadow"
+                className="border border-ink/15 bg-surface-card p-5 text-center backdrop-blur transition-colors hover:border-ink"
               >
-                <Icon className={`mx-auto ${factColors[i]}`} size={26} />
+                <Icon className="mx-auto text-ink" size={26} />
                 <p className="mt-3 text-xs font-semibold uppercase tracking-wide text-ink-muted">
                   {label}
                 </p>

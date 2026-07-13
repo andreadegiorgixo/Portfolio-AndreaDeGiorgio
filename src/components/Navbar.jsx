@@ -29,10 +29,10 @@ export default function Navbar() {
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.7, ease: "easeOut" }}
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 inset-x-0 z-50 border-b transition-all duration-300 ${
         scrolled
-          ? "bg-surface/80 backdrop-blur-lg shadow-lg"
-          : "bg-transparent"
+          ? "border-ink/10 bg-surface/90 backdrop-blur-lg"
+          : "border-transparent bg-transparent"
       }`}
     >
       <nav className="w-full flex items-center justify-between gap-4 px-6 py-4 sm:px-10 lg:grid lg:grid-cols-3">
@@ -43,12 +43,12 @@ export default function Navbar() {
           Andrea De Giorgio
         </a>
 
-        <ul className="hidden lg:flex items-center justify-center gap-8 font-medium text-ink-soft lg:justify-self-center">
+        <ul className="hidden lg:flex items-center justify-center gap-8 text-xs font-bold uppercase tracking-widest text-ink-soft lg:justify-self-center">
           {links.map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
-                className="relative transition-colors hover:text-accent-600 after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-accent-500 after:transition-all hover:after:w-full"
+                className="relative transition-colors hover:text-ink after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-accent after:transition-all hover:after:w-full"
               >
                 {link.label}
               </a>
@@ -62,20 +62,22 @@ export default function Navbar() {
             <ThemeToggle />
           </div>
 
-          <a
+          <motion.a
+            whileTap={{ scale: 0.96 }}
             href="#contact"
-            className="hidden lg:inline-flex items-center rounded-full bg-gradient-to-r from-accent-500 to-accent-700 px-5 py-2.5 text-sm font-semibold text-white shadow-lg transition-transform hover:scale-105"
+            className="hidden lg:inline-flex items-center border border-ink px-5 py-2.5 text-xs font-bold uppercase tracking-widest text-ink transition-colors hover:bg-ink hover:text-surface"
           >
             {t.nav.cta}
-          </a>
+          </motion.a>
 
-          <button
+          <motion.button
+            whileTap={{ scale: 0.92 }}
             onClick={() => setOpen((v) => !v)}
-            className="lg:hidden grid place-items-center w-10 h-10 rounded-full bg-accent-100 text-accent-700 dark:bg-accent-500/20 dark:text-accent-300"
+            className="lg:hidden grid place-items-center w-10 h-10 border border-ink/20 text-ink"
             aria-label={open ? t.nav.closeMenu : t.nav.openMenu}
           >
             {open ? <X size={20} /> : <Menu size={20} />}
-          </button>
+          </motion.button>
         </div>
       </nav>
 
@@ -86,7 +88,7 @@ export default function Navbar() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="lg:hidden overflow-hidden bg-surface/95 backdrop-blur-lg px-6 border-t border-border"
+            className="lg:hidden overflow-hidden bg-surface/95 backdrop-blur-lg px-6 border-t border-ink/10"
           >
             <ul className="flex flex-col gap-1 py-2">
               {links.map((link) => (
@@ -94,7 +96,7 @@ export default function Navbar() {
                   <a
                     href={link.href}
                     onClick={() => setOpen(false)}
-                    className="block py-3 font-medium text-ink-soft hover:text-accent-600"
+                    className="block py-3 text-xs font-bold uppercase tracking-widest text-ink-soft hover:text-ink"
                   >
                     {link.label}
                   </a>

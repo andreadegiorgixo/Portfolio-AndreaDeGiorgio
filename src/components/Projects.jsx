@@ -17,11 +17,6 @@ const meta = [
   },
 ];
 
-const tagStyles = [
-  "bg-brand-100 text-brand-700 dark:bg-brand-900/40 dark:text-brand-300",
-  "bg-accent-100 text-accent-600 dark:bg-accent-900/40 dark:text-accent-400",
-];
-
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   show: (i = 0) => ({
@@ -45,13 +40,14 @@ export default function Projects() {
           viewport={{ once: true, amount: 0.4 }}
           className="text-center"
         >
-          <span className="text-sm font-bold uppercase tracking-widest text-brand-600 dark:text-brand-400">
+          <span className="text-sm font-bold uppercase tracking-widest text-ink-muted">
             {t.projects.eyebrow}
           </span>
-          <h2 className="mt-3 font-display text-4xl font-bold text-ink sm:text-5xl">
+          <h2 className="mt-3 font-display text-4xl font-bold uppercase text-ink sm:text-5xl">
             {t.projects.title}
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-ink-soft">
+          <div className="mx-auto mt-6 h-px w-16 bg-ink" />
+          <p className="mx-auto mt-6 max-w-2xl text-ink-soft">
             {t.projects.description}
           </p>
         </motion.div>
@@ -66,7 +62,7 @@ export default function Projects() {
               viewport={{ once: true, amount: 0.3 }}
               custom={i}
               whileHover={{ y: -6 }}
-              className="flex h-full flex-col rounded-3xl border border-border bg-surface-card p-6 shadow-brand-sm backdrop-blur transition-shadow hover:shadow-brand"
+              className="flex h-full flex-col border border-ink/15 bg-surface-card p-6 backdrop-blur transition-colors hover:border-ink"
             >
               <h3 className="font-display italic text-lg font-bold text-ink">
                 {name}
@@ -75,26 +71,25 @@ export default function Projects() {
                 {desc}
               </p>
               <div className="mt-5 flex flex-wrap gap-2">
-                {tags.map((tag, j) => (
+                {tags.map((tag) => (
                   <span
                     key={tag}
-                    className={`rounded-full px-3 py-1 font-display text-xs font-semibold italic ${
-                      tagStyles[j % tagStyles.length]
-                    }`}
+                    className="border border-ink/20 px-3 py-1 font-display text-xs font-semibold italic text-ink-soft"
                   >
                     {tag}
                   </span>
                 ))}
               </div>
-              <a
+              <motion.a
+                whileTap={{ scale: 0.97 }}
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-5 inline-flex items-center justify-between gap-2 rounded-2xl bg-ink/5 px-4 py-3 text-sm font-semibold text-ink transition-colors hover:bg-brand-600 hover:text-white"
+                className="mt-5 inline-flex items-center justify-between gap-2 border border-ink px-4 py-3 text-sm font-semibold text-ink transition-colors hover:bg-ink hover:text-surface"
               >
                 {t.projects.visit}
                 <ArrowUpRight size={16} />
-              </a>
+              </motion.a>
             </motion.article>
           ))}
         </div>

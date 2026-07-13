@@ -77,6 +77,32 @@ export const translations = {
           desc: "Indirizzo in programmazione, networking e sistemi informativi: basi di programmazione (C, C++), database relazionali (MySQL), reti e telecomunicazioni, architettura dei computer, sistemi operativi e sicurezza informatica.",
         },
       ],
+      testimonials: {
+        caption: "Testimonianze",
+        title: "Cosa dicono di me",
+        items: [
+          {
+            name: "Francesco De Giorgio",
+            quote:
+              "È stato davvero un piacere lavorare con Andrea: professionale, attento ai dettagli e sempre disponibile. Sono certo che resteremo in contatto anche per le prossime occasioni.",
+          },
+          {
+            name: "Gabriele Schina",
+            quote:
+              "Lavorare con Andrea è stata un'esperienza molto positiva, serio, preciso e affidabile in ogni fase. Sicuramente resteremo in contatto.",
+          },
+          {
+            name: "Marco Pisani",
+            quote:
+              "È stato un piacere collaborare con Andrea: competente, puntuale e sempre pronto ad ascoltare le esigenze. Non vedo l'ora di restare in contatto per nuove occasioni di collaborazione.",
+          },
+          {
+            name: "Salvatore Labriola",
+            quote:
+              "Andrea mi ha creato un bel sito web per il mio salone di parrucchieri: mi è stato davvero tanto utile per farmi conoscere e vendermi nel mondo online. Consigliatissimo!",
+          },
+        ],
+      },
     },
     projects: {
       eyebrow: "Projects",
@@ -104,6 +130,58 @@ export const translations = {
       title: "Restiamo in contatto",
       description:
         "Se vuoi scrivermi per collaborazioni, progetti o semplicemente per fare networking, qui trovi i miei principali riferimenti.",
+      form: {
+        name: "Nome",
+        namePlaceholder: "Il tuo nome",
+        email: "Email",
+        emailPlaceholder: "La tua email",
+        message: "Messaggio",
+        messagePlaceholder: "Scrivi qui il tuo messaggio...",
+        send: "Invia messaggio",
+        sending: "Invio in corso...",
+        success: "Messaggio inviato! Ti risponderò al più presto.",
+        error: "Invio non riuscito. Riprova più tardi o scrivimi direttamente via email.",
+        privacyLabel: "Ho letto e accetto la",
+        privacyLinkText: "Privacy Policy",
+        privacyRequiredError: "Devi accettare la Privacy Policy per inviare il messaggio.",
+      },
+    },
+    privacy: {
+      badge: "Documento legale",
+      title: "Privacy Policy",
+      backHome: "Torna alla home",
+      intro:
+        "Questa pagina descrive le modalità di trattamento dei dati personali degli utenti che compilano il form di contatto presente su questo sito, in conformità al Regolamento UE 2016/679 (GDPR).",
+      sections: [
+        {
+          heading: "Titolare del trattamento",
+          body: "Il Titolare del trattamento dei dati è Andrea De Giorgio, contattabile all'indirizzo email degiorgio.andrea2003@gmail.com.",
+        },
+        {
+          heading: "Dati raccolti",
+          body: "Attraverso il form di contatto vengono raccolti esclusivamente i dati forniti volontariamente dall'utente: nome, indirizzo email e contenuto del messaggio.",
+        },
+        {
+          heading: "Finalità del trattamento",
+          body: "I dati raccolti sono utilizzati unicamente per rispondere alle richieste di contatto inviate tramite il form del sito e per eventuali comunicazioni relative a collaborazioni o progetti richiesti dall'utente.",
+        },
+        {
+          heading: "Base giuridica",
+          body: "Il trattamento è basato sul consenso esplicito dell'utente, espresso tramite la spunta dell'apposita casella prima dell'invio del messaggio (art. 6.1.a GDPR).",
+        },
+        {
+          heading: "Modalità e conservazione dei dati",
+          body: "I dati vengono trasmessi via email e conservati esclusivamente per il tempo necessario a evadere la richiesta, salvo diversi obblighi di legge.",
+        },
+        {
+          heading: "Comunicazione e diffusione",
+          body: "I dati raccolti non vengono comunicati a terzi né diffusi, salvo obblighi previsti dalla legge.",
+        },
+        {
+          heading: "Diritti dell'interessato",
+          body: "In qualsiasi momento è possibile esercitare i diritti di accesso, rettifica, cancellazione, limitazione, opposizione e portabilità dei propri dati, previsti dagli articoli 15-22 del GDPR, scrivendo all'indirizzo email indicato sopra. È inoltre possibile proporre reclamo al Garante per la protezione dei dati personali.",
+        },
+      ],
     },
     footer: (year) => `© ${year} Andrea De Giorgio. All rights reserved.`,
     theme: { light: "Chiaro", dark: "Scuro", system: "Sistema", label: "Tema" },
@@ -187,6 +265,32 @@ export const translations = {
           desc: "Focus on programming, networking and information systems: programming fundamentals (C, C++), relational databases (MySQL), networks and telecommunications, computer architecture, operating systems and cybersecurity.",
         },
       ],
+      testimonials: {
+        caption: "Testimonials",
+        title: "What people say about me",
+        items: [
+          {
+            name: "Francesco De Giorgio",
+            quote:
+              "It was truly a pleasure working with Andrea: professional, detail-oriented and always available. I'm sure we'll stay in touch for future opportunities too.",
+          },
+          {
+            name: "Gabriele Schina",
+            quote:
+              "Working with Andrea was a very positive experience, reliable, precise and dependable at every stage. We'll definitely stay in touch.",
+          },
+          {
+            name: "Marco Pisani",
+            quote:
+              "It was a pleasure collaborating with Andrea: competent, punctual and always ready to listen to the needs at hand. Looking forward to staying in touch for future collaborations.",
+          },
+          {
+            name: "Salvatore Labriola",
+            quote:
+              "Andrea built me a beautiful website for my barber shop: it was extremely helpful in getting my business known and selling it to the online world. Highly recommended!",
+          },
+        ],
+      },
     },
     projects: {
       eyebrow: "Projects",
@@ -214,6 +318,58 @@ export const translations = {
       title: "Let's stay in touch",
       description:
         "If you'd like to reach out for collaborations, projects, or simply to network, here are my main contact channels.",
+      form: {
+        name: "Name",
+        namePlaceholder: "Your name",
+        email: "Email",
+        emailPlaceholder: "Your email",
+        message: "Message",
+        messagePlaceholder: "Write your message here...",
+        send: "Send message",
+        sending: "Sending...",
+        success: "Message sent! I'll get back to you soon.",
+        error: "Failed to send. Please try again later or email me directly.",
+        privacyLabel: "I have read and accept the",
+        privacyLinkText: "Privacy Policy",
+        privacyRequiredError: "You must accept the Privacy Policy before sending the message.",
+      },
+    },
+    privacy: {
+      badge: "Legal document",
+      title: "Privacy Policy",
+      backHome: "Back to home",
+      intro:
+        "This page describes how the personal data of users who fill in the contact form on this site is processed, in accordance with EU Regulation 2016/679 (GDPR).",
+      sections: [
+        {
+          heading: "Data controller",
+          body: "The data controller is Andrea De Giorgio, reachable at degiorgio.andrea2003@gmail.com.",
+        },
+        {
+          heading: "Data collected",
+          body: "The contact form only collects data voluntarily provided by the user: name, email address and message content.",
+        },
+        {
+          heading: "Purpose of processing",
+          body: "The data collected is used solely to reply to contact requests submitted through the site's form and for any communication related to collaborations or projects requested by the user.",
+        },
+        {
+          heading: "Legal basis",
+          body: "Processing is based on the explicit consent of the user, expressed by checking the dedicated box before sending the message (Art. 6.1.a GDPR).",
+        },
+        {
+          heading: "Handling and retention",
+          body: "Data is transmitted via email and retained only for the time necessary to handle the request, unless otherwise required by law.",
+        },
+        {
+          heading: "Disclosure",
+          body: "The data collected is not shared with third parties or disclosed, except where required by law.",
+        },
+        {
+          heading: "Data subject rights",
+          body: "You may exercise your rights of access, rectification, erasure, restriction, objection and data portability at any time, as provided by Articles 15-22 of the GDPR, by writing to the email address above. You may also lodge a complaint with the competent data protection authority.",
+        },
+      ],
     },
     footer: (year) => `© ${year} Andrea De Giorgio. All rights reserved.`,
     theme: { light: "Light", dark: "Dark", system: "System", label: "Theme" },

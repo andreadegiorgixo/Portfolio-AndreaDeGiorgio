@@ -30,13 +30,13 @@ export default function ThemeToggle() {
       <button
         onClick={() => setOpen((v) => !v)}
         aria-label={t.theme.label}
-        className="grid h-10 w-10 place-items-center rounded-full border border-border bg-surface-alt text-ink-soft transition-colors hover:text-brand-600"
+        className="grid h-10 w-10 place-items-center border border-ink/20 bg-surface-alt text-ink-soft transition-colors hover:border-ink hover:text-ink"
       >
         <Current size={18} />
       </button>
 
       {open && (
-        <div className="absolute right-0 top-12 z-50 w-40 overflow-hidden rounded-2xl border border-border bg-surface shadow-brand-sm">
+        <div className="absolute right-0 top-12 z-50 w-40 overflow-hidden border border-ink/20 bg-surface">
           {options.map(({ value, icon: Icon }) => (
             <button
               key={value}
@@ -48,9 +48,7 @@ export default function ThemeToggle() {
             >
               <Icon size={16} />
               <span className="flex-1">{t.theme[value]}</span>
-              {theme === value && (
-                <Check size={14} className="text-brand-600" />
-              )}
+              {theme === value && <Check size={14} className="text-ink" />}
             </button>
           ))}
         </div>

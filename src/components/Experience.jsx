@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Briefcase, GraduationCap } from "lucide-react";
+import { Briefcase, GraduationCap, Quote } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 
 const fadeUp = {
@@ -11,27 +11,7 @@ const fadeUp = {
   }),
 };
 
-const accents = {
-  brand: {
-    icon: "from-brand-400 to-brand-600",
-    caption: "text-brand-600 dark:text-brand-400",
-    border: "border-brand-200 dark:border-brand-800",
-    dot: "from-brand-400 to-brand-600",
-    period: "text-brand-600 dark:text-brand-400",
-    bullet: "bg-brand-400",
-  },
-  accent: {
-    icon: "from-accent-400 to-accent-600",
-    caption: "text-accent-600 dark:text-accent-400",
-    border: "border-accent-200 dark:border-accent-800",
-    dot: "from-accent-400 to-accent-600",
-    period: "text-accent-600 dark:text-accent-400",
-    bullet: "bg-accent-400",
-  },
-};
-
-function Track({ icon: Icon, caption, title, items, accent = "brand" }) {
-  const a = accents[accent];
+function Track({ icon: Icon, caption, title, items }) {
   return (
     <div>
       <motion.div
@@ -41,22 +21,18 @@ function Track({ icon: Icon, caption, title, items, accent = "brand" }) {
         viewport={{ once: true, amount: 0.4 }}
         className="mb-8 flex items-center gap-3"
       >
-        <span
-          className={`grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br text-white shadow-brand-sm ${a.icon}`}
-        >
+        <span className="grid h-11 w-11 place-items-center border border-ink bg-ink text-surface">
           <Icon size={20} />
         </span>
         <div>
-          <p
-            className={`text-xs font-bold uppercase tracking-widest ${a.caption}`}
-          >
+          <p className="text-xs font-bold uppercase tracking-widest text-ink-muted">
             {caption}
           </p>
           <h3 className="font-display text-xl font-bold text-ink">{title}</h3>
         </div>
       </motion.div>
 
-      <div className={`relative space-y-6 border-l-2 pl-6 ${a.border}`}>
+      <div className="relative space-y-6 border-l-2 border-ink/15 pl-6">
         {items.map((entry, i) => (
           <motion.article
             key={entry.role}
@@ -65,14 +41,10 @@ function Track({ icon: Icon, caption, title, items, accent = "brand" }) {
             whileInView="show"
             viewport={{ once: true, amount: 0.3 }}
             custom={i + 1}
-            className="relative rounded-3xl border border-border bg-surface-card p-6 shadow-brand-sm backdrop-blur"
+            className="relative border border-ink/15 bg-surface-card p-6 backdrop-blur"
           >
-            <span
-              className={`absolute -left-[1.95rem] top-7 h-3 w-3 rounded-full bg-gradient-to-br ring-4 ring-surface ${a.dot}`}
-            />
-            <span
-              className={`text-xs font-bold uppercase tracking-wide ${a.period}`}
-            >
+            <span className="absolute -left-[1.9rem] top-7 h-3 w-3 bg-accent ring-4 ring-surface" />
+            <span className="text-xs font-bold uppercase tracking-wide text-ink-muted">
               {entry.period}
             </span>
             <h4 className="mt-1 font-display italic text-lg font-bold text-ink">
@@ -90,9 +62,7 @@ function Track({ icon: Icon, caption, title, items, accent = "brand" }) {
               <ul className="mt-3 space-y-2 text-sm leading-relaxed text-ink-soft">
                 {entry.bullets.map((b) => (
                   <li key={b} className="flex gap-2">
-                    <span
-                      className={`mt-2 h-1.5 w-1.5 flex-none rounded-full ${a.bullet}`}
-                    />
+                    <span className="mt-2 h-1.5 w-1.5 flex-none bg-ink/50" />
                     <span>{b}</span>
                   </li>
                 ))}
@@ -118,12 +88,13 @@ export default function Experience() {
           viewport={{ once: true, amount: 0.4 }}
           className="text-center"
         >
-          <span className="text-sm font-bold uppercase tracking-widest text-brand-600 dark:text-brand-400">
+          <span className="text-sm font-bold uppercase tracking-widest text-ink-muted">
             {t.experience.eyebrow}
           </span>
-          <h2 className="mt-3 font-display text-4xl font-bold text-ink sm:text-5xl">
+          <h2 className="mt-3 font-display text-4xl font-bold uppercase text-ink sm:text-5xl">
             {t.experience.title}
           </h2>
+          <div className="mx-auto mt-6 h-px w-16 bg-ink" />
         </motion.div>
 
         <div className="mt-16 grid gap-14 lg:grid-cols-2">
@@ -132,15 +103,57 @@ export default function Experience() {
             caption={t.experience.workCaption}
             title={t.experience.workTitle}
             items={t.experience.work}
-            accent="brand"
           />
           <Track
             icon={GraduationCap}
             caption={t.experience.eduCaption}
             title={t.experience.eduTitle}
             items={t.experience.education}
-            accent="accent"
           />
+        </div>
+
+        <div className="mt-20">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.4 }}
+            className="mb-8 flex items-center gap-3"
+          >
+            <span className="grid h-11 w-11 place-items-center border border-ink bg-ink text-surface">
+              <Quote size={20} />
+            </span>
+            <div>
+              <p className="text-xs font-bold uppercase tracking-widest text-ink-muted">
+                {t.experience.testimonials.caption}
+              </p>
+              <h3 className="font-display text-xl font-bold text-ink">
+                {t.experience.testimonials.title}
+              </h3>
+            </div>
+          </motion.div>
+
+          <div className="grid gap-6 sm:grid-cols-2">
+            {t.experience.testimonials.items.map(({ name, quote }, i) => (
+              <motion.figure
+                key={name}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.3 }}
+                custom={i}
+                className="flex h-full flex-col border border-ink/15 bg-surface-card p-6 backdrop-blur"
+              >
+                <Quote size={20} className="text-ink-muted" />
+                <blockquote className="mt-3 flex-1 text-sm leading-relaxed text-ink-soft">
+                  “{quote}”
+                </blockquote>
+                <figcaption className="mt-4 font-display italic text-sm font-bold text-ink">
+                  {name}
+                </figcaption>
+              </motion.figure>
+            ))}
+          </div>
         </div>
       </div>
     </section>

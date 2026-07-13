@@ -6,53 +6,59 @@
   --font-display: "Fraunces", "Outfit", system-ui, sans-serif;
   --font-body: "Manrope", system-ui, sans-serif;
 
-  /* Brand — violet, the primary interactive/accent hue */
-  --color-brand-50: #f5f3ff;
-  --color-brand-100: #ede9fe;
-  --color-brand-200: #ddd6fe;
-  --color-brand-300: #c4b5fd;
-  --color-brand-400: #a78bfa;
-  --color-brand-500: #8b5cf6;
-  --color-brand-600: #7c3aed;
-  --color-brand-700: #6d28d9;
-  --color-brand-800: #5b21b6;
-  --color-brand-900: #4c1d95;
+  /* Brand — near-black ink, the single "accent" for keywords/details */
+  --color-brand-50: #f6f6f4;
+  --color-brand-100: #e8e7e2;
+  --color-brand-200: #cfcdc4;
+  --color-brand-300: #a9a69a;
+  --color-brand-400: #7d7a6c;
+  --color-brand-500: #55534a;
+  --color-brand-600: #34332c;
+  --color-brand-700: #201f1a;
+  --color-brand-800: #141310;
+  --color-brand-900: #0a0a08;
 
-  /* Accent — warm amber, violet's complement, used sparingly for pop */
-  --color-accent-50: #fffbeb;
-  --color-accent-100: #fef3c7;
-  --color-accent-200: #fde68a;
-  --color-accent-300: #fcd34d;
-  --color-accent-400: #fbbf24;
-  --color-accent-500: #f59e0b;
-  --color-accent-600: #d97706;
-  --color-accent-700: #b45309;
+  /* Accent — single controlled warm terracotta, used sparingly for emphasis */
+  --color-accent-50: #fbf0ea;
+  --color-accent-100: #f5dacb;
+  --color-accent-200: #e8b291;
+  --color-accent-300: #d98f63;
+  --color-accent-400: #c36f41;
+  --color-accent-500: #a85530;
+  --color-accent-600: #8b4526;
+  --color-accent-700: #6e351e;
+  --color-accent-800: #4a2414;
+  --color-accent-900: #2c150c;
 
-  --shadow-brand: 0 20px 60px -15px rgba(109, 40, 217, 0.35);
-  --shadow-brand-sm: 0 8px 24px -8px rgba(109, 40, 217, 0.22);
+  --shadow-brand: 0 20px 45px -18px rgba(10, 10, 8, 0.45);
+  --shadow-brand-sm: 0 8px 20px -10px rgba(10, 10, 8, 0.3);
 }
 
-/* Semantic surface/text tokens — flip automatically with the .dark class */
+/* Semantic surface/text tokens — light grey & near-black, flips with .dark */
 :root {
-  --color-surface: #ffffff;
-  --color-surface-soft: #f8f8fc;
-  --color-surface-alt: #f1f0f9;
-  --color-surface-card: rgba(255, 255, 255, 0.7);
-  --color-ink: #1e1b2e;
-  --color-ink-soft: #4b4763;
-  --color-ink-muted: #8f8aa8;
-  --color-border: #e5e3f0;
+  --color-surface: #e7e5df;
+  --color-surface-soft: #eeece7;
+  --color-surface-alt: #b6b4ab;
+  --color-surface-card: rgba(255, 255, 255, 0.55);
+  --color-ink: #14140f;
+  --color-ink-soft: #3a382f;
+  --color-ink-muted: #6b6a5f;
+  --color-border: #14140f;
+  --color-accent: var(--color-accent-500);
+  --color-accent-text: var(--color-accent-600);
 }
 
 .dark {
-  --color-surface: #0e0c17;
-  --color-surface-soft: #14111f;
-  --color-surface-alt: #1c1830;
-  --color-surface-card: rgba(28, 24, 48, 0.65);
-  --color-ink: #f3f1fa;
-  --color-ink-soft: #c9c4dc;
-  --color-ink-muted: #8f89a8;
-  --color-border: #2a2540;
+  --color-surface: #131311;
+  --color-surface-soft: #1a1a17;
+  --color-surface-alt: #26251f;
+  --color-surface-card: rgba(255, 255, 255, 0.04)  ;
+  --color-ink: #eeece4;
+  --color-ink-soft: #c9c7bb;
+  --color-ink-muted: #8b8a7d;
+  --color-border: #eeece4;
+  --color-accent: var(--color-accent-400);
+  --color-accent-text: var(--color-accent-300);
 }
 
 @theme inline {
@@ -64,6 +70,8 @@
   --color-ink-soft: var(--color-ink-soft);
   --color-ink-muted: var(--color-ink-muted);
   --color-border: var(--color-border);
+  --color-accent: var(--color-accent);
+  --color-accent-text: var(--color-accent-text);
 }
 
 html {
@@ -85,8 +93,24 @@ body {
 }
 
 ::selection {
-  background: var(--color-brand-300);
-  color: var(--color-brand-900);
+  background: var(--color-ink);
+  color: var(--color-surface);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 ::-webkit-scrollbar {
@@ -96,15 +120,11 @@ body {
   background: var(--color-surface-soft);
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(var(--color-brand-400), var(--color-brand-600));
-  border-radius: 999px;
+  background: var(--color-ink-muted);
 }
 
 .text-gradient {
-  background: linear-gradient(90deg, #8b5cf6, #d97706, #7c3aed);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--color-ink);
 }
 
 .bg-noise {
