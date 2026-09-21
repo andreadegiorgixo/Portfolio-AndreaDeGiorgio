@@ -35,20 +35,20 @@ export default function Navbar() {
           : "border-transparent bg-transparent"
       }`}
     >
-      <nav className="w-full flex items-center justify-between gap-4 px-6 py-4 sm:px-10 lg:grid lg:grid-cols-3">
+      <nav className="w-full flex items-center justify-between gap-4 px-6 py-4 sm:px-10 xl:grid xl:grid-cols-[1fr_auto_1fr]">
         <a
           href="#top"
-          className="flex items-center gap-2 font-display italic font-bold text-lg text-ink lg:justify-self-start"
+          className="flex items-center gap-2 font-display italic font-bold text-lg text-ink xl:justify-self-start"
         >
           Andrea De Giorgio
         </a>
 
-        <ul className="hidden lg:flex items-center justify-center gap-8 text-xs font-bold uppercase tracking-widest text-ink-soft lg:justify-self-center">
+        <ul className="hidden xl:flex items-center justify-center gap-8 text-xs font-bold uppercase tracking-widest text-ink-soft xl:justify-self-center">
           {links.map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
-                className="relative transition-colors hover:text-ink after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-accent after:transition-all hover:after:w-full"
+                className="relative whitespace-nowrap transition-colors hover:text-ink after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-accent after:transition-all hover:after:w-full"
               >
                 {link.label}
               </a>
@@ -56,7 +56,7 @@ export default function Navbar() {
           ))}
         </ul>
 
-        <div className="flex items-center gap-3 lg:justify-self-end">
+        <div className="flex items-center gap-3 xl:justify-self-end">
           <div className="hidden sm:flex items-center gap-2">
             <LanguageToggle />
             <ThemeToggle />
@@ -65,7 +65,7 @@ export default function Navbar() {
           <motion.a
             whileTap={{ scale: 0.96 }}
             href="#contact"
-            className="hidden lg:inline-flex items-center border border-ink px-5 py-2.5 text-xs font-bold uppercase tracking-widest text-ink transition-colors hover:bg-ink hover:text-surface"
+            className="hidden xl:inline-flex items-center border border-ink px-5 py-2.5 text-xs font-bold uppercase tracking-widest text-ink transition-colors hover:bg-ink hover:text-surface"
           >
             {t.nav.cta}
           </motion.a>
@@ -73,7 +73,7 @@ export default function Navbar() {
           <motion.button
             whileTap={{ scale: 0.92 }}
             onClick={() => setOpen((v) => !v)}
-            className="lg:hidden grid place-items-center w-10 h-10 border border-ink/20 text-ink"
+            className="xl:hidden grid place-items-center w-10 h-10 border border-ink/20 text-ink"
             aria-label={open ? t.nav.closeMenu : t.nav.openMenu}
           >
             {open ? <X size={20} /> : <Menu size={20} />}
@@ -88,7 +88,7 @@ export default function Navbar() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="lg:hidden overflow-hidden bg-surface/95 backdrop-blur-lg px-6 border-t border-ink/10"
+            className="xl:hidden overflow-hidden bg-surface/95 backdrop-blur-lg px-6 border-t border-ink/10"
           >
             <ul className="flex flex-col gap-1 py-2">
               {links.map((link) => (
