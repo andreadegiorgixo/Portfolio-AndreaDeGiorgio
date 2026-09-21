@@ -17,7 +17,7 @@ export const translations = {
         "Full Stack Developer specializzato in Java, Spring & Spring Boot, con una forte passione per il Front-End. Appassionato di tecnologia e innovazione, sempre alla ricerca di nuove competenze e sfide per mettermi in gioco.",
       contact: "Contattami",
       cv: "Scarica CV",
-      workspace: "my workspace",
+      workspace: "my workspace ✨",
       scrollDown: "Scorri verso il basso",
     },
     about: {
@@ -52,14 +52,25 @@ export const translations = {
       eduTitle: "Cosa ho studiato",
       work: [
         {
-          period: "Nov 2024 — Presente",
+          period: "Lug 2026 - Presente",
+          role: "Junior Full Stack Developer @ EY",
+          place: "Bari, Puglia, Italia",
+          bullets: [
+            "Sviluppo back-end con Java (21) e utilizzo di framework: Spring & Spring Boot.",
+            "Database: Oracle.",
+            "Containerizzazione attraverso l'uso di Docker.",
+            "Sviluppo front-end con Angular.",
+          ],
+        },
+        {
+          period: "Nov 2024 — Lug 2026",
           role: "Gestione Ticket & Client Support @ EY",
           place: "Bari, Puglia, Italia",
           bullets: [
-            "Gestisco il ciclo completo dei ticket di supporto clienti su Salesforce, assicurando risoluzione efficace e proattiva.",
-            "Approfondisco quotidianamente l'utilizzo di database Oracle per analisi e troubleshooting.",
-            "Collaboro con i team interni per ottimizzare i processi di client support.",
-            "Ho superato con successo la fase di stage a maggio 2025, ottenendo la conferma del contratto di apprendistato.",
+            "Analisi e troubleshooting su database Oracle: scrittura di query SQL per filtrare i dati e individuare la causa delle anomalie segnalate sul software interno del cliente.",
+            "Gestione di circa 230 ticket al giorno su Salesforce per due enti della Pubblica Amministrazione centrale, nel rispetto degli SLA previsti.",
+            "Prioritizzazione dei ticket in un contesto ad alto volume, distinguendo richieste normative e richieste tecniche.",
+            "Collaborazione quotidiana con il team di supporto per lo smaltimento coordinato delle richieste.",
           ],
         },
       ],
@@ -205,7 +216,7 @@ export const translations = {
         "Full Stack Developer specialized in Java, Spring & Spring Boot, with a strong passion for Front-End. Passionate about technology and innovation, always looking for new skills and challenges to take on.",
       contact: "Get in touch",
       cv: "Download CV",
-      workspace: "my workspace",
+      workspace: "my workspace ✨",
       scrollDown: "Scroll down",
     },
     about: {
@@ -241,13 +252,24 @@ export const translations = {
       work: [
         {
           period: "Nov 2024 — Present",
+          role: "Junior Full Stack Developer @ EY",
+          place: "Bari, Puglia, Italy",
+          bullets: [
+            "Back-end development with Java (21) and frameworks: Spring & Spring Boot.",
+            "Database: Oracle.",
+            "Containerization with Docker.",
+            "Front-end development with Angular.",
+          ],
+        },
+        {
+          period: "Nov 2024 — Present",
           role: "Ticket Management & Client Support @ EY",
           place: "Bari, Puglia, Italy",
           bullets: [
-            "I manage the full lifecycle of customer support tickets on Salesforce, ensuring effective, proactive resolution.",
-            "I deepen my daily use of Oracle databases for analysis and troubleshooting.",
-            "I collaborate with internal teams to optimize client support processes.",
-            "I successfully completed my internship in May 2025, securing a confirmed apprenticeship contract.",
+            "Analysis and troubleshooting on Oracle databases: writing SQL queries to filter data and identify the root cause of issues reported on the client's internal software.",
+            "Handling around 230 tickets per day on Salesforce for two central Public Administration bodies, in compliance with the agreed SLAs.",
+            "Ticket prioritization in a high-volume context, distinguishing between regulatory and technical requests.",
+            "Daily collaboration with the support team to clear requests in a coordinated way.",
           ],
         },
       ],
