@@ -16,8 +16,11 @@ export const translations = {
         "In EY seguo l'avanzamento di progetti IT: stime, tempi, rischi e report. In parallelo costruisco applicazioni full stack con Java, Spring Boot e Angular, e questo mi aiuta a capire cosa c'è dietro una stima o un ritardo.",
       contact: "Contattami",
       cv: "Scarica CV",
-      workspace: "La mia postazione",
-      scrollDown: "Scorri verso il basso",
+      proof: [
+        { label: "Percorso", value: "Da supporto tecnico a PMO in EY" },
+        { label: "Sede", value: "Taranto & Bari" },
+        { label: "Focus", value: "PMO IT · Java, Spring Boot, Angular" },
+      ],
     },
     about: {
       eyebrow: "Chi sono",
@@ -246,8 +249,11 @@ export const translations = {
         "At EY I follow the progress of IT projects: estimates, timelines, risks and reporting. On the side I build full stack applications with Java, Spring Boot and Angular, which helps me see what sits behind an estimate or a delay.",
       contact: "Get in touch",
       cv: "Download CV",
-      workspace: "My workspace",
-      scrollDown: "Scroll down",
+      proof: [
+        { label: "Path", value: "From technical support to PMO at EY" },
+        { label: "Based in", value: "Taranto & Bari" },
+        { label: "Focus", value: "IT PMO · Java, Spring Boot, Angular" },
+      ],
     },
     about: {
       eyebrow: "About",

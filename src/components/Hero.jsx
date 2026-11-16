@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
-import { ArrowDown, Download, Mail } from "lucide-react";
+import { Download, Mail } from "lucide-react";
 import profilePhoto from "../assets/profile-hero.jpg";
-import workspacePhoto from "../assets/workspace.jpg";
 import { useLanguage } from "../context/LanguageContext";
 
 const container = {
@@ -22,47 +21,50 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="relative flex min-h-screen items-center px-6 pt-32 pb-20 lg:pl-28"
+      className="relative px-6 pt-32 pb-20 sm:pb-24 lg:pt-32 lg:pb-24"
     >
-      <span className="pointer-events-none absolute left-6 top-1/2 hidden -translate-y-1/2 -rotate-90 select-none font-display text-sm font-bold uppercase tracking-[0.6em] text-ink-muted lg:block">
-        Portfolio
-      </span>
-
-      <div className="mx-auto grid w-full max-w-6xl items-stretch gap-16 lg:grid-cols-[1fr_1.1fr] lg:divide-x lg:divide-ink/10">
+      <div className="mx-auto grid w-full max-w-6xl items-center gap-14 lg:grid-cols-[1.15fr_0.85fr] lg:gap-20">
         <motion.div
           variants={container}
           initial="hidden"
           animate="show"
-          className="order-2 text-center lg:order-1 lg:pr-14 lg:text-left"
+          className="order-2 text-center lg:order-1 lg:text-left"
         >
           <motion.span
             variants={item}
-            className="inline-flex items-center gap-2 border border-ink/20 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-ink-soft"
+            className="inline-flex items-center border border-ink/15 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-ink-soft"
           >
             {t.hero.role}
           </motion.span>
 
           <motion.h1
             variants={item}
-            className="mt-8 font-display text-5xl font-extrabold uppercase leading-[0.95] tracking-tight text-ink sm:text-6xl"
+            className="mt-6 font-display text-ink"
           >
-            {t.hero.greeting}
-            <br />
-            <span className="italic text-accent-text">Andrea</span> De Giorgio
+            <span className="block text-xl italic text-accent-text sm:text-2xl">
+              {t.hero.greeting}
+            </span>
+            <span className="mt-2 block text-[2.75rem] font-extrabold uppercase leading-[1] tracking-tight sm:text-6xl lg:text-7xl">
+              <span className="block whitespace-nowrap">Andrea</span>
+              <span className="block whitespace-nowrap">De Giorgio</span>
+            </span>
           </motion.h1>
 
-          <motion.div variants={item} className="mt-8 h-px w-24 bg-ink" />
+          <motion.div
+            variants={item}
+            className="mx-auto mt-6 h-px w-16 bg-ink lg:mx-0"
+          />
 
           <motion.p
             variants={item}
-            className="mx-auto mt-8 max-w-xl text-lg text-ink-soft sm:text-xl lg:mx-0"
+            className="mx-auto mt-6 max-w-xl text-pretty text-lg text-ink-soft sm:text-xl lg:mx-0"
           >
             {t.hero.description}
           </motion.p>
 
           <motion.div
             variants={item}
-            className="mt-10 flex flex-wrap items-center justify-center gap-4 lg:justify-start"
+            className="mt-8 flex flex-wrap items-center justify-center gap-4 lg:justify-start"
           >
             <motion.a
               whileTap={{ scale: 0.97 }}
@@ -80,49 +82,44 @@ export default function Hero() {
               <Download size={18} /> {t.hero.cv}
             </motion.a>
           </motion.div>
+
+          <motion.dl
+            variants={item}
+            className="mt-10 grid gap-5 border-t border-ink/15 pt-6 text-center sm:grid-cols-3 sm:gap-6 lg:text-left"
+          >
+            {t.hero.proof.map((fact) => (
+              <div key={fact.label}>
+                <dt className="text-xs font-bold uppercase tracking-widest text-ink-muted">
+                  {fact.label}
+                </dt>
+                <dd className="mt-1.5 text-balance font-display text-base font-semibold leading-snug text-ink">
+                  {fact.value}
+                </dd>
+              </div>
+            ))}
+          </motion.dl>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.15 }}
-          className="relative order-1 mx-auto w-full max-w-md lg:order-2 lg:pl-14"
+          className="relative order-1 mx-auto w-full max-w-xs sm:max-w-sm lg:order-2 lg:mr-0 lg:ml-auto lg:max-w-md"
         >
+          {/* Cornice sottile sfalsata: dà profondità senza ombre né colori nuovi */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 translate-x-4 translate-y-4 border border-ink/15"
+          />
           <div className="relative aspect-[4/5] w-full overflow-hidden border border-ink/15 bg-surface-alt">
             <img
               src={profilePhoto}
               alt="Andrea De Giorgio"
-              className="h-full w-full object-cover"
+              className="h-full w-full object-cover object-[50%_20%]"
             />
           </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
-            className="absolute -bottom-8 -left-8 w-48 overflow-hidden border-4 border-surface bg-surface-alt shadow-brand sm:w-60"
-          >
-            <img
-              src={workspacePhoto}
-              alt={t.hero.workspace}
-              className="aspect-square w-full object-cover"
-            />
-            <span className="block bg-ink px-2.5 py-1.5 text-center text-[10px] font-bold uppercase tracking-widest text-surface">
-              {t.hero.workspace}
-            </span>
-          </motion.div>
         </motion.div>
       </div>
-
-      <motion.a
-        href="#about"
-        aria-label={t.hero.scrollDown}
-        className="absolute bottom-10 left-1/2 hidden -translate-x-1/2 place-items-center w-11 h-11 border border-ink/20 text-ink bg-surface/50 backdrop-blur sm:grid"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <ArrowDown size={18} />
-      </motion.a>
     </section>
   );
 }
