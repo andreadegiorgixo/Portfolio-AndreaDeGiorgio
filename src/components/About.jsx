@@ -18,7 +18,7 @@ export default function About() {
   const { t } = useLanguage();
 
   return (
-    <section id="about" className="relative px-6 py-28">
+    <section id="about" className="relative px-6 py-20 sm:py-28 compact:py-16">
       <div className="mx-auto max-w-5xl">
         <motion.div
           variants={fadeUp}
@@ -30,23 +30,27 @@ export default function About() {
           <span className="text-sm font-bold uppercase tracking-widest text-ink-muted">
             {t.about.eyebrow}
           </span>
-          <h2 className="mt-3 font-display text-4xl font-bold uppercase text-ink sm:text-5xl">
+          <h2 className="section-title mt-3 font-display font-bold uppercase text-ink">
             {t.about.title}
           </h2>
           <div className="mx-auto mt-6 h-px w-16 bg-ink" />
         </motion.div>
 
-        <div className="mt-16 grid items-center gap-12 md:grid-cols-[0.85fr_1.15fr]">
+        <div className="mt-12 grid items-center gap-10 sm:mt-16 sm:gap-12 wide:grid-cols-[0.85fr_1.15fr] compact:gap-8">
           <motion.div
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.4 }}
-            className="mx-auto w-full max-w-xs overflow-hidden border border-ink/15 bg-surface-alt"
+            className="mx-auto w-full max-w-[min(100%,20rem,50dvh)] overflow-hidden border border-ink/15 bg-surface-alt compact:max-w-full sm:max-w-xs"
           >
             <img
               src={aboutPhoto}
               alt="Andrea De Giorgio"
+              width={1200}
+              height={1600}
+              loading="lazy"
+              decoding="async"
               className="aspect-[4/5] w-full object-cover"
             />
           </motion.div>
@@ -57,7 +61,7 @@ export default function About() {
             whileInView="show"
             viewport={{ once: true, amount: 0.4 }}
             custom={1}
-            className="space-y-4 text-lg leading-relaxed text-ink-soft"
+            className="space-y-4 text-base leading-relaxed text-ink-soft sm:text-lg compact:text-base"
           >
             <p>
               <strong className="font-display italic font-semibold text-ink">
@@ -77,7 +81,7 @@ export default function About() {
           </motion.div>
         </div>
 
-        <div className="mt-16 grid grid-cols-2 gap-4 sm:grid-cols-4">
+        <div className="mt-12 grid grid-cols-2 gap-3 sm:mt-16 sm:grid-cols-4 sm:gap-4">
           {t.about.facts.map(({ label, value }, i) => {
             const Icon = icons[i];
             return (
@@ -89,13 +93,13 @@ export default function About() {
                 viewport={{ once: true, amount: 0.4 }}
                 custom={i}
                 whileHover={{ y: -6 }}
-                className="border border-ink/15 bg-surface-card p-5 text-center backdrop-blur transition-colors hover:border-ink"
+                className="border border-ink/15 bg-surface-card p-3 text-center backdrop-blur transition-colors hover:border-ink sm:p-5"
               >
                 <Icon className="mx-auto text-ink" size={26} />
                 <p className="mt-3 text-xs font-semibold uppercase tracking-wide text-ink-muted">
                   {label}
                 </p>
-                <p className="mt-1 font-display font-bold text-ink">
+                <p className="mt-1 break-words font-display text-[0.9375rem] font-bold text-ink sm:text-base">
                   {value}
                 </p>
               </motion.div>

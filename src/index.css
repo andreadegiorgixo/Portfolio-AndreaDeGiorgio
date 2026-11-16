@@ -2,6 +2,25 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Hero/About a due colonne: da 1024px in su, oppure su schermi larghi almeno
+   560px ma sotto i 1024px quando sono in orizzontale o quadrati (telefoni in
+   landscape, piccoli tablet quadrati), dove l'impilamento verticale
+   riempirebbe tutta l'altezza con la sola foto. */
+@custom-variant wide {
+  @media (min-width: 64rem) {
+    @slot;
+  }
+  @media (min-width: 35rem) and (max-width: 63.99rem) and (min-aspect-ratio: 1/1) {
+    @slot;
+  }
+}
+/* Solo il caso compatto (560-1023px, landscape/quadrato): tipografia più contenuta. */
+@custom-variant compact {
+  @media (min-width: 35rem) and (max-width: 63.99rem) and (min-aspect-ratio: 1/1) {
+    @slot;
+  }
+}
+
 @theme {
   --font-display: "Fraunces", "Outfit", system-ui, sans-serif;
   --font-body: "Manrope", system-ui, sans-serif;
@@ -81,7 +100,31 @@
 
 html {
   scroll-behavior: smooth;
+  /* La navbar è fissa: le ancore (#about, #skills) non finiscono sotto di essa */
+  scroll-padding-top: 5rem;
   color-scheme: light;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Schermi grandi: tutto il layout è in rem, quindi alzando la dimensione base
+   contenuti, spaziature e container crescono in proporzione invece di
+   restare piccoli al centro di un monitor 4K. Le media query dei breakpoint
+   non cambiano (in una media query 1rem resta sempre 16px). */
+@media (min-width: 1920px) and (min-height: 1000px) {
+  html {
+    font-size: 112.5%;
+  }
+}
+@media (min-width: 2560px) and (min-height: 1300px) {
+  html {
+    font-size: 125%;
+  }
+}
+@media (min-width: 3200px) and (min-height: 1700px) {
+  html {
+    font-size: 150%;
+  }
 }
 
 html.dark {
@@ -94,6 +137,11 @@ body {
   color: var(--color-ink);
   font-family: var(--font-body);
   overflow-x: hidden;
+  /* Rete di sicurezza: una parola lunga va a capo invece di allargare la pagina */
+  overflow-wrap: anywhere;
+  /* Telefoni con notch in orizzontale: il contenuto non finisce sotto l'incavo */
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -131,6 +179,19 @@ body {
 }
 ::-webkit-scrollbar-thumb {
   background: var(--color-ink-muted);
+}
+
+/* Titoli di sezione fluidi: "UNDERSTANDING" / "COMPETENZE" non sforano a 320px */
+.section-title {
+  font-size: min(8.6vw, 2.25rem);
+  line-height: 1.1;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+@media (min-width: 40rem) {
+  .section-title {
+    font-size: min(7.5vw, 3rem);
+  }
 }
 
 .text-gradient {

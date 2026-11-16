@@ -56,7 +56,7 @@ export default function Projects() {
   const projects = t.projects.items.map((p, i) => ({ ...p, ...meta[i] }));
 
   return (
-    <section id="projects" className="relative px-6 py-28">
+    <section id="projects" className="relative px-6 py-20 sm:py-28 compact:py-16">
       <div className="mx-auto max-w-5xl">
         <motion.div
           variants={fadeUp}
@@ -68,7 +68,7 @@ export default function Projects() {
           <span className="text-sm font-bold uppercase tracking-widest text-ink-muted">
             {t.projects.eyebrow}
           </span>
-          <h2 className="mt-3 font-display text-4xl font-bold uppercase text-ink sm:text-5xl">
+          <h2 className="section-title mt-3 font-display font-bold uppercase text-ink">
             {t.projects.title}
           </h2>
           <div className="mx-auto mt-6 h-px w-16 bg-ink" />
@@ -77,7 +77,7 @@ export default function Projects() {
           </p>
         </motion.div>
 
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-6 sm:mt-16 sm:grid-cols-2 lg:grid-cols-3">
           {projects.map(({ name, desc, tags, href, image, github }, i) => (
             <motion.article
               key={name}
@@ -94,10 +94,13 @@ export default function Projects() {
                   src={image}
                   alt={name}
                   loading="lazy"
+                  decoding="async"
+                  width={1200}
+                  height={675}
                   className="aspect-[16/9] w-full border-b border-ink/15 object-cover object-top"
                 />
               )}
-              <div className="flex flex-1 flex-col p-6">
+              <div className="flex min-w-0 flex-1 flex-col p-5 sm:p-6">
               <h3 className="font-display italic text-lg font-bold text-ink">
                 {name}
               </h3>

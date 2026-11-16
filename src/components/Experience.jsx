@@ -13,7 +13,7 @@ const fadeUp = {
 
 function Track({ icon: Icon, caption, title, items }) {
   return (
-    <div>
+    <div className="min-w-0">
       <motion.div
         variants={fadeUp}
         initial="hidden"
@@ -32,7 +32,7 @@ function Track({ icon: Icon, caption, title, items }) {
         </div>
       </motion.div>
 
-      <div className="relative space-y-6 border-l-2 border-ink/15 pl-6">
+      <div className="relative space-y-5 border-l-2 border-ink/15 pl-5 sm:space-y-6 sm:pl-6">
         {items.map((entry, i) => (
           <motion.article
             key={entry.role}
@@ -41,9 +41,9 @@ function Track({ icon: Icon, caption, title, items }) {
             whileInView="show"
             viewport={{ once: true, amount: 0.3 }}
             custom={i + 1}
-            className="relative border border-ink/15 bg-surface-card p-6 backdrop-blur"
+            className="relative border border-ink/15 bg-surface-card p-5 backdrop-blur sm:p-6"
           >
-            <span className="absolute -left-[1.9rem] top-7 h-3 w-3 bg-accent ring-4 ring-surface" />
+            <span className="absolute -left-[1.65rem] top-7 sm:-left-[1.9rem] h-3 w-3 bg-accent ring-4 ring-surface" />
             <span className="text-xs font-bold uppercase tracking-wide text-ink-muted">
               {entry.period}
             </span>
@@ -79,7 +79,7 @@ export default function Experience() {
   const { t } = useLanguage();
 
   return (
-    <section id="experience" className="relative px-6 py-28">
+    <section id="experience" className="relative px-6 py-20 sm:py-28 compact:py-16">
       <div className="mx-auto max-w-5xl">
         <motion.div
           variants={fadeUp}
@@ -91,7 +91,7 @@ export default function Experience() {
           <span className="text-sm font-bold uppercase tracking-widest text-ink-muted">
             {t.experience.eyebrow}
           </span>
-          <h2 className="mt-3 font-display text-4xl font-bold uppercase text-ink sm:text-5xl">
+          <h2 className="section-title mt-3 font-display font-bold uppercase text-ink">
             {t.experience.title}
           </h2>
           <div className="mx-auto mt-6 h-px w-16 bg-ink" />
@@ -100,7 +100,7 @@ export default function Experience() {
           </p>
         </motion.div>
 
-        <div className="mt-16 grid gap-14 lg:grid-cols-2">
+        <div className="mt-12 grid gap-12 sm:mt-16 sm:gap-14 lg:grid-cols-2">
           <Track
             icon={Briefcase}
             caption={t.experience.workCaption}
@@ -115,7 +115,7 @@ export default function Experience() {
           />
         </div>
 
-        <div className="mt-20">
+        <div className="mt-16 sm:mt-20">
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -145,7 +145,7 @@ export default function Experience() {
                 whileInView="show"
                 viewport={{ once: true, amount: 0.3 }}
                 custom={i}
-                className="flex h-full flex-col border border-ink/15 bg-surface-card p-6 backdrop-blur"
+                className="flex h-full flex-col border border-ink/15 bg-surface-card p-5 backdrop-blur sm:p-6"
               >
                 <Quote size={20} className="text-ink-muted" />
                 <blockquote className="mt-3 flex-1 text-sm leading-relaxed text-ink-soft">

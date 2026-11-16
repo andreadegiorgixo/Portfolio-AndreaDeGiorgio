@@ -52,7 +52,7 @@ function Chips({ items }) {
           viewport={{ once: true, amount: 0.5 }}
           custom={i * 0.4}
           whileHover={{ y: -2 }}
-          className="border border-ink/20 bg-surface-card px-4 py-2 font-display text-sm font-medium italic text-ink backdrop-blur transition-colors hover:border-ink"
+          className="max-w-full border border-ink/20 bg-surface-card px-3 py-2 font-display text-sm sm:px-4 font-medium italic text-ink backdrop-blur transition-colors hover:border-ink"
         >
           {tech}
         </motion.span>
@@ -65,7 +65,7 @@ export default function Skills() {
   const { t } = useLanguage();
 
   return (
-    <section id="skills" className="relative px-6 py-28">
+    <section id="skills" className="relative px-6 py-20 sm:py-28 compact:py-16">
       <div className="mx-auto max-w-5xl">
         <motion.div
           variants={fadeUp}
@@ -77,7 +77,7 @@ export default function Skills() {
           <span className="text-sm font-bold uppercase tracking-widest text-ink-muted">
             {t.skills.eyebrow}
           </span>
-          <h2 className="mt-3 font-display text-4xl font-bold uppercase text-ink sm:text-5xl">
+          <h2 className="section-title mt-3 font-display font-bold uppercase text-ink">
             {t.skills.title}
           </h2>
           <div className="mx-auto mt-6 h-px w-16 bg-ink" />
@@ -86,7 +86,7 @@ export default function Skills() {
           </p>
         </motion.div>
 
-        <div className="mt-16 grid gap-14 lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="mt-12 grid gap-12 sm:mt-16 sm:gap-14 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
             <p className="mb-4 text-xs font-bold uppercase tracking-widest text-ink-muted">
               {t.skills.devCaption}
@@ -101,7 +101,7 @@ export default function Skills() {
                   viewport={{ once: true, amount: 0.4 }}
                   custom={i}
                 >
-                  <div className="mb-2 flex items-baseline justify-between">
+                  <div className="mb-2 flex flex-wrap items-baseline justify-between gap-x-3">
                     <span className="font-display italic font-semibold text-ink">
                       {name}
                     </span>

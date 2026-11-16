@@ -47,7 +47,7 @@ function App() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <div className="relative flex min-h-screen flex-col font-body">
+      <div className="relative flex min-h-dvh flex-col font-body">
         <AmbientBackground />
         <Navbar page={page} />
         <main className="flex-1">

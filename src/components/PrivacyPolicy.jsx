@@ -15,7 +15,7 @@ export default function PrivacyPolicy() {
   const { t } = useLanguage();
 
   return (
-    <section className="relative px-6 py-28">
+    <section className="relative px-6 py-20 sm:py-28 compact:py-16">
       <div className="mx-auto max-w-3xl">
         <motion.div
           variants={fadeUp}
@@ -23,10 +23,10 @@ export default function PrivacyPolicy() {
           animate="show"
           className="text-center"
         >
-          <span className="inline-flex items-center gap-2 border border-ink/20 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-ink-muted">
+          <span className="inline-flex max-w-full items-center gap-2 border border-ink/20 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-ink-muted">
             <ShieldCheck size={14} /> {t.privacy.badge}
           </span>
-          <h1 className="mt-5 font-display text-4xl font-bold uppercase text-ink sm:text-5xl">
+          <h1 className="section-title mt-5 font-display font-bold uppercase text-ink">
             {t.privacy.title}
           </h1>
           <div className="mx-auto mt-6 h-px w-16 bg-ink" />
@@ -42,10 +42,10 @@ export default function PrivacyPolicy() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.4 }}
-              className="border-l-2 border-ink/15 pl-6"
+              className="border-l-2 border-ink/15 pl-4 sm:pl-6"
             >
               <h2 className="font-display text-lg font-bold text-ink">{section.heading}</h2>
-              <p className="mt-2 text-ink-soft">{section.body}</p>
+              <p className="mt-2 break-words text-ink-soft">{section.body}</p>
             </motion.div>
           ))}
         </div>
@@ -53,7 +53,7 @@ export default function PrivacyPolicy() {
         <div className="mt-16 text-center">
           <a
             href="#top"
-            className="inline-flex items-center gap-2 border border-ink px-6 py-3 text-xs font-bold uppercase tracking-widest text-ink transition-colors hover:bg-ink hover:text-surface"
+            className="inline-flex min-h-12 items-center gap-2 border border-ink px-6 py-3 text-xs font-bold uppercase tracking-widest text-ink transition-colors hover:bg-ink hover:text-surface"
           >
             <ArrowLeft size={14} /> {t.privacy.backHome}
           </a>
