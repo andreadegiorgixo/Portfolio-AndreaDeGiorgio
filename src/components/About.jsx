@@ -70,6 +70,7 @@ export default function About() {
               {t.about.afterStack}
             </p>
             <p>{t.about.paragraph}</p>
+            <p>{t.about.paragraph2}</p>
             <span className="inline-flex items-center border border-ink/20 px-4 py-1.5 font-display text-sm font-semibold italic text-ink">
               {t.about.badge}
             </span>

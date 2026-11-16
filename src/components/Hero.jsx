@@ -39,7 +39,7 @@ export default function Hero() {
             variants={item}
             className="inline-flex items-center gap-2 border border-ink/20 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-ink-soft"
           >
-            {t.hero.location}
+            {t.hero.role}
           </motion.span>
 
           <motion.h1
@@ -104,7 +104,7 @@ export default function Hero() {
           >
             <img
               src={workspacePhoto}
-              alt="La mia postazione di lavoro"
+              alt={t.hero.workspace}
               className="aspect-square w-full object-cover"
             />
             <span className="block bg-ink px-2.5 py-1.5 text-center text-[10px] font-bold uppercase tracking-widest text-surface">

@@ -95,6 +95,9 @@ export default function Experience() {
             {t.experience.title}
           </h2>
           <div className="mx-auto mt-6 h-px w-16 bg-ink" />
+          <p className="mx-auto mt-6 max-w-2xl text-ink-soft">
+            {t.experience.description}
+          </p>
         </motion.div>
 
         <div className="mt-16 grid gap-14 lg:grid-cols-2">
