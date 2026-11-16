@@ -1,15 +1,40 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
+import candidateImg from "../assets/projects/candidate.jpg";
+import propassImg from "../assets/projects/propass.jpg";
+import ristorandotiImg from "../assets/projects/ristorandoti.jpg";
+import barberImg from "../assets/projects/barber.jpg";
+import itesImg from "../assets/projects/ites.jpg";
 
 const meta = [
   {
-    tags: ["HTML", "Bootstrap", "CSS", "JS"],
-    href: "https://www.ites-srl.it/index.html",
+    image: candidateImg,
+    tags: ["Java 21", "Spring Boot", "PostgreSQL", "Docker", "Angular"],
+    href: "https://github.com/andreadegiorgixo/Candidate",
+    github: true,
   },
   {
+    image: propassImg,
+    tags: ["Java 21", "Spring Boot", "Oracle", "Docker", "Angular"],
+    href: "https://github.com/andreadegiorgixo/ProPass",
+    github: true,
+  },
+  {
+    image: ristorandotiImg,
+    tags: ["Java", "Spring Boot", "Oracle", "Redis", "Docker", "Angular"],
+    href: "https://github.com/andreadegiorgixo/Ristorandoti",
+    github: true,
+  },
+  {
+    image: barberImg,
     tags: ["HTML", "Bootstrap", "CSS", "JS"],
     href: "https://barber-salvatore-labriola.netlify.app/",
+  },
+  {
+    image: itesImg,
+    tags: ["HTML", "Bootstrap", "CSS", "JS"],
+    href: "https://www.ites-srl.it/index.html",
   },
   {
     tags: ["HTML", "Bootstrap", "CSS", "JS"],
@@ -53,7 +78,7 @@ export default function Projects() {
         </motion.div>
 
         <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map(({ name, desc, tags, href }, i) => (
+          {projects.map(({ name, desc, tags, href, image, github }, i) => (
             <motion.article
               key={name}
               variants={fadeUp}
@@ -62,8 +87,17 @@ export default function Projects() {
               viewport={{ once: true, amount: 0.3 }}
               custom={i}
               whileHover={{ y: -6 }}
-              className="flex h-full flex-col border border-ink/15 bg-surface-card p-6 backdrop-blur transition-colors hover:border-ink"
+              className="flex h-full flex-col overflow-hidden border border-ink/15 bg-surface-card backdrop-blur transition-colors hover:border-ink"
             >
+              {image && (
+                <img
+                  src={image}
+                  alt={name}
+                  loading="lazy"
+                  className="aspect-[16/9] w-full border-b border-ink/15 object-cover object-top"
+                />
+              )}
+              <div className="flex flex-1 flex-col p-6">
               <h3 className="font-display italic text-lg font-bold text-ink">
                 {name}
               </h3>
@@ -87,9 +121,10 @@ export default function Projects() {
                 rel="noopener noreferrer"
                 className="mt-5 inline-flex items-center justify-between gap-2 border border-ink px-4 py-3 text-sm font-semibold text-ink transition-colors hover:bg-ink hover:text-surface"
               >
-                {t.projects.visit}
+                {github ? t.projects.visitGithub : t.projects.visit}
                 <ArrowUpRight size={16} />
               </motion.a>
+              </div>
             </motion.article>
           ))}
         </div>

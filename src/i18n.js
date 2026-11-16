@@ -14,7 +14,7 @@ export const translations = {
       location: "Taranto & Bari, Puglia, Italia",
       greeting: "Ciao, sono",
       description:
-        "Full Stack Developer specializzato in Java, Spring & Spring Boot, con una forte passione per il Front-End. Appassionato di tecnologia e innovazione, sempre alla ricerca di nuove competenze e sfide per mettermi in gioco.",
+        "Junior PMO e Software Engineer in EY: dal project management allo sviluppo software. Lavoro con Java, Spring Boot, Oracle e Docker, unendo visione di progetto e competenze tecniche.",
       contact: "Contattami",
       cv: "Scarica CV",
       workspace: "my workspace ✨",
@@ -23,18 +23,18 @@ export const translations = {
     about: {
       eyebrow: "Chi sono",
       title: "Ciao, sono Andrea.",
-      role: "Full Stack Developer",
-      stack: "Java | Spring & Spring Boot",
-      introEnd: ", specializzato in",
-      afterStack: ", con una forte passione per il Front-End.",
+      role: "PMO & Junior Software Engineer",
+      stack: "Java | Spring Boot | Oracle | Docker",
+      introEnd: ", con competenze in",
+      afterStack: ". Dal project management allo sviluppo software.",
       paragraph:
-        "Combino una profonda conoscenza di Java e dell'ecosistema Spring per sviluppare backend robusti e scalabili con un'attenzione maniacale all'esperienza utente sul frontend, realizzando applicazioni complete, performanti e orientate al business.",
-      badge: "Full Stack Developer",
+        "Ho iniziato come tecnico IT e oggi unisco due prospettive: la gestione dei progetti e la comprensione tecnica di come il software viene realizzato. Sapere come si costruisce un'applicazione mi aiuta a stimare meglio, a individuare prima criticità e ritardi e a parlare in modo efficace sia con i team tecnici sia con il management.",
+      badge: "PMO & Junior Software Engineer",
       facts: [
-        { label: "Ruolo", value: "Full Stack Developer" },
+        { label: "Ruolo", value: "PMO & Software Engineer" },
         { label: "Sede", value: "Taranto & Bari" },
         { label: "Lingue", value: "Italiano & Inglese" },
-        { label: "Status", value: "Aperto a collaborazioni" },
+        { label: "Status", value: "Aperto a opportunità" },
       ],
     },
     skills: {
@@ -52,18 +52,20 @@ export const translations = {
       eduTitle: "Cosa ho studiato",
       work: [
         {
-          period: "Lug 2026 - Presente",
-          role: "Junior Full Stack Developer @ EY",
+          period: "Nov 2026 — Presente",
+          role: "Junior Project Management Office @ EY",
           place: "Bari, Puglia, Italia",
           bullets: [
-            "Sviluppo back-end con Java (21) e utilizzo di framework: Spring & Spring Boot.",
-            "Database: Oracle.",
-            "Containerizzazione attraverso l'uso di Docker.",
-            "Sviluppo front-end con Angular.",
+            "Attualmente in fase di onboarding sul progetto: presa in carico del contesto, degli obiettivi, delle milestone e dei processi di governance in uso.",
+            "Supporto alla stima di tempi ed effort delle attività progettuali, in affiancamento al Project Manager.",
+            "Monitoraggio dell'avanzamento rispetto al piano e individuazione tempestiva di ritardi, scostamenti e criticità.",
+            "Aggiornamento periodico dello stato dei progetti e tracciamento di rischi e issue aperte.",
+            "Preparazione di presentazioni e report di sintesi per manager e stakeholder.",
+            "Tool — Excel: costruzione e manutenzione di piani di avanzamento, tracker e report di stato.",
           ],
         },
         {
-          period: "Nov 2024 — Lug 2026",
+          period: "Nov 2024 — Nov 2026",
           role: "Gestione Ticket & Client Support @ EY",
           place: "Bari, Puglia, Italia",
           bullets: [
@@ -119,16 +121,29 @@ export const translations = {
       eyebrow: "Projects",
       title: "Alcuni lavori realizzati",
       description:
-        "Progetti web realizzati con attenzione a interfaccia, struttura e cura dei dettagli — esperienze semplici, chiare e visivamente riconoscibili.",
+        "Dalle applicazioni full stack ai siti web per attività locali: progetti realizzati con attenzione a struttura, interfaccia e cura dei dettagli.",
       visit: "Visita il progetto",
+      visitGithub: "Vedi su GitHub",
       items: [
         {
-          name: "ITES Srl",
-          desc: "Un sito dal taglio essenziale e professionale, pensato per presentare l'azienda con una struttura pulita, leggibile e immediata. Il focus è sulla chiarezza dei contenuti e su una navigazione lineare.",
+          name: "Candidate",
+          desc: "Web app personale per seguire la ricerca di lavoro e capire ogni giorno cosa fare. Ogni candidatura è un viaggio lungo una linea di sei fermate, dall'attesa all'assunzione, con colloqui, aziende, offerte, CV e grafici sull'andamento. Backend Spring Boot con autenticazione JWT, PostgreSQL in Docker con schema Flyway e test con Testcontainers; frontend Angular 22.",
+        },
+        {
+          name: "ProPass",
+          desc: "Password manager full stack con Spring Boot, Oracle in Docker e Angular. Registrazione e login con Argon2, sessione con protezione CSRF e vault personale con ricerca. Progetto didattico: prossimo passo, cifratura zero-knowledge lato client.",
+        },
+        {
+          name: "Ristorandoti",
+          desc: "Social network verticale che connette professionisti e aziende della ristorazione: profili, pagine aziendali, feed, offerte di lavoro, recensioni e follow. Spring Security con OAuth2 e RBAC, Oracle con Flyway, Redis, WebSocket, Testcontainers e frontend Angular.",
         },
         {
           name: "BLS | Barber Labriola Salvatore",
-          desc: "Una landing page più diretta e orientata all'immagine, costruita per valorizzare il brand con una presenza online elegante, contemporanea e pensata prima di tutto per il mobile.",
+          desc: "Sito per un salone storico di Taranto, attivo dal 1960: galleria lavori, recensioni, orari e listino prezzi, con contatti a un tap di distanza. Design responsive pensato prima di tutto per il mobile.",
+        },
+        {
+          name: "ITES Srl",
+          desc: "Sito aziendale per ITES, realtà di Taranto nei servizi IT ed elettrici: narrazione aziendale con timeline interattiva, brochure scaricabile e collegamenti diretti a contatti, PEC e social.",
         },
         {
           name: "Tabaccheria Lama",
@@ -213,7 +228,7 @@ export const translations = {
       location: "Taranto & Bari, Puglia, Italy",
       greeting: "Hi, I'm",
       description:
-        "Full Stack Developer specialized in Java, Spring & Spring Boot, with a strong passion for Front-End. Passionate about technology and innovation, always looking for new skills and challenges to take on.",
+        "Junior PMO and Software Engineer at EY: from project management to software development. I work with Java, Spring Boot, Oracle and Docker, combining a project-level view with technical skills.",
       contact: "Get in touch",
       cv: "Download CV",
       workspace: "my workspace ✨",
@@ -222,18 +237,18 @@ export const translations = {
     about: {
       eyebrow: "About",
       title: "Hi, I'm Andrea.",
-      role: "Full Stack Developer",
-      stack: "Java | Spring & Spring Boot",
-      introEnd: ", specialized in",
-      afterStack: ", with a strong passion for Front-End.",
+      role: "PMO & Junior Software Engineer",
+      stack: "Java | Spring Boot | Oracle | Docker",
+      introEnd: ", skilled in",
+      afterStack: ". From project management to software development.",
       paragraph:
-        "I combine a deep knowledge of Java and the Spring ecosystem to build robust, scalable backends with a meticulous focus on the frontend user experience, delivering complete, performant, business-oriented applications.",
-      badge: "Full Stack Developer",
+        "I started as an IT technician and today I combine two perspectives: managing projects and understanding, technically, how software is built. Knowing how an application is made helps me estimate better, spot issues and delays earlier, and talk effectively with both technical teams and management.",
+      badge: "PMO & Junior Software Engineer",
       facts: [
-        { label: "Role", value: "Full Stack Developer" },
+        { label: "Role", value: "PMO & Software Engineer" },
         { label: "Based in", value: "Taranto & Bari" },
         { label: "Languages", value: "Italian & English" },
-        { label: "Status", value: "Open to collaborations" },
+        { label: "Status", value: "Open to opportunities" },
       ],
     },
     skills: {
@@ -251,18 +266,20 @@ export const translations = {
       eduTitle: "What I've studied",
       work: [
         {
-          period: "Nov 2024 — Present",
-          role: "Junior Full Stack Developer @ EY",
+          period: "Nov 2026 — Present",
+          role: "Junior Project Management Office @ EY",
           place: "Bari, Puglia, Italy",
           bullets: [
-            "Back-end development with Java (21) and frameworks: Spring & Spring Boot.",
-            "Database: Oracle.",
-            "Containerization with Docker.",
-            "Front-end development with Angular.",
+            "Currently onboarding on the project: getting up to speed on the context, objectives, milestones and the governance processes in place.",
+            "Support in estimating the time and effort of project activities, working alongside the Project Manager.",
+            "Monitoring progress against the plan and promptly spotting delays, deviations and critical issues.",
+            "Periodic updates on project status and tracking of risks and open issues.",
+            "Preparation of presentations and summary reports for managers and stakeholders.",
+            "Tool — Excel: building and maintaining progress plans, trackers and status reports.",
           ],
         },
         {
-          period: "Nov 2024 — Present",
+          period: "Nov 2024 — Nov 2026",
           role: "Ticket Management & Client Support @ EY",
           place: "Bari, Puglia, Italy",
           bullets: [
@@ -318,16 +335,29 @@ export const translations = {
       eyebrow: "Projects",
       title: "Some work I've built",
       description:
-        "Web projects built with care for interface, structure and attention to detail — experiences that are simple, clear and visually recognizable.",
-      visit: "Visit the project",
+        "From full stack applications to websites for local businesses: projects built with care for structure, interface and attention to detail.",
+      visit: "Visit project",
+      visitGithub: "View on GitHub",
       items: [
         {
-          name: "ITES Srl",
-          desc: "An essential, professional site designed to present the company with a clean, readable and straightforward structure. The focus is on content clarity and linear navigation.",
+          name: "Candidate",
+          desc: "A personal web app to track your job search and know what to do each day. Every application is a journey along a six-stop line, from waiting to hiring, with interviews, companies, offers, CVs and progress charts. Spring Boot backend with JWT authentication, PostgreSQL in Docker with a Flyway schema and Testcontainers tests; Angular 22 frontend.",
+        },
+        {
+          name: "ProPass",
+          desc: "Full stack password manager built with Spring Boot, Oracle in Docker and Angular. Sign-up and login with Argon2, CSRF-protected sessions and a personal searchable vault. Educational project: next step, client-side zero-knowledge encryption.",
+        },
+        {
+          name: "Ristorandoti",
+          desc: "A vertical social network connecting restaurant professionals and businesses: profiles, company pages, feed, job offers, reviews and follows. Spring Security with OAuth2 and RBAC, Oracle with Flyway, Redis, WebSocket, Testcontainers and an Angular frontend.",
         },
         {
           name: "BLS | Barber Labriola Salvatore",
-          desc: "A more direct, image-driven landing page, built to showcase the brand with an elegant, contemporary online presence designed mobile-first.",
+          desc: "A website for a historic Taranto barber shop, open since 1960: work gallery, reviews, opening hours and price list, with contacts one tap away. Responsive design built mobile-first.",
+        },
+        {
+          name: "ITES Srl",
+          desc: "Corporate website for ITES, a Taranto company in IT and electrical services: company story with an interactive timeline, downloadable brochure and direct links to contacts, certified email and social media.",
         },
         {
           name: "Tabaccheria Lama",
