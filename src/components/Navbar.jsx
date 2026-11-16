@@ -5,17 +5,16 @@ import { useLanguage } from "../context/LanguageContext";
 import ThemeToggle from "./ThemeToggle";
 import LanguageToggle from "./LanguageToggle";
 
-export default function Navbar() {
+export default function Navbar({ page }) {
   const { t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
   const links = [
-    { href: "#about", label: t.nav.about },
-    { href: "#skills", label: t.nav.skills },
-    { href: "#experience", label: t.nav.experience },
-    { href: "#projects", label: t.nav.projects },
-    { href: "#contact", label: t.nav.contact },
+    { href: "#top", page: "home", label: t.nav.about },
+    { href: "#experience", page: "experience", label: t.nav.experience },
+    { href: "#projects", page: "projects", label: t.nav.projects },
+    { href: "#contact", page: "contact", label: t.nav.contact },
   ];
 
   useEffect(() => {
@@ -48,7 +47,10 @@ export default function Navbar() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="relative whitespace-nowrap transition-colors hover:text-ink after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-accent after:transition-all hover:after:w-full"
+                aria-current={page === link.page ? "page" : undefined}
+                className={`relative whitespace-nowrap transition-colors hover:text-ink after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-px after:bg-accent after:transition-all hover:after:w-full ${
+                  page === link.page ? "text-ink after:w-full" : "after:w-0"
+                }`}
               >
                 {link.label}
               </a>
@@ -96,7 +98,10 @@ export default function Navbar() {
                   <a
                     href={link.href}
                     onClick={() => setOpen(false)}
-                    className="block py-3 text-xs font-bold uppercase tracking-widest text-ink-soft hover:text-ink"
+                    aria-current={page === link.page ? "page" : undefined}
+                    className={`block py-3 text-xs font-bold uppercase tracking-widest hover:text-ink ${
+                      page === link.page ? "text-ink" : "text-ink-soft"
+                    }`}
                   >
                     {link.label}
                   </a>
