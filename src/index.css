@@ -6,59 +6,63 @@
   --font-display: "Fraunces", "Outfit", system-ui, sans-serif;
   --font-body: "Manrope", system-ui, sans-serif;
 
-  /* Brand — near-black ink, the single "accent" for keywords/details */
-  --color-brand-50: #f6f6f4;
-  --color-brand-100: #e8e7e2;
-  --color-brand-200: #cfcdc4;
-  --color-brand-300: #a9a69a;
-  --color-brand-400: #7d7a6c;
-  --color-brand-500: #55534a;
-  --color-brand-600: #34332c;
-  --color-brand-700: #201f1a;
-  --color-brand-800: #141310;
-  --color-brand-900: #0a0a08;
+  /* Brand — linen & sage-tinted neutrals (ink = 800, surface = 100) */
+  --color-brand-50: #f5f4f0;
+  --color-brand-100: #eceae3;
+  --color-brand-200: #c9ccbf;
+  --color-brand-300: #a6aa9c;
+  --color-brand-400: #84897c;
+  --color-brand-500: #656b5e;
+  --color-brand-600: #4e5348;
+  --color-brand-700: #3c4237;
+  --color-brand-800: #22261f;
+  --color-brand-900: #141612;
 
-  /* Accent — single controlled warm terracotta, used sparingly for emphasis */
-  --color-accent-50: #fbf0ea;
-  --color-accent-100: #f5dacb;
-  --color-accent-200: #e8b291;
-  --color-accent-300: #d98f63;
-  --color-accent-400: #c36f41;
-  --color-accent-500: #a85530;
-  --color-accent-600: #8b4526;
-  --color-accent-700: #6e351e;
-  --color-accent-800: #4a2414;
-  --color-accent-900: #2c150c;
+  /* Accent — single soft sage, used sparingly for emphasis */
+  --color-accent-50: #f1f4ee;
+  --color-accent-100: #dde4d6;
+  --color-accent-200: #b3c2a4;
+  --color-accent-300: #9aaa8b;
+  --color-accent-400: #8a9a7c;
+  --color-accent-500: #7e8d70;
+  --color-accent-600: #56664a;
+  --color-accent-700: #43503a;
+  --color-accent-800: #2f382a;
+  --color-accent-900: #1b2118;
 
-  --shadow-brand: 0 20px 45px -18px rgba(10, 10, 8, 0.45);
-  --shadow-brand-sm: 0 8px 20px -10px rgba(10, 10, 8, 0.3);
+  --shadow-brand: 0 20px 45px -18px rgba(34, 38, 31, 0.45);
+  --shadow-brand-sm: 0 8px 20px -10px rgba(34, 38, 31, 0.3);
 }
 
-/* Semantic surface/text tokens — light grey & near-black, flips with .dark */
+/* Semantic surface/text tokens — linen & sage, flips with .dark */
 :root {
-  --color-surface: #e7e5df;
-  --color-surface-soft: #eeece7;
-  --color-surface-alt: #b6b4ab;
+  --color-surface: #eceae3;
+  --color-surface-soft: #f3f2ed;
+  --color-surface-alt: #c9ccbf;
   --color-surface-card: rgba(255, 255, 255, 0.55);
-  --color-ink: #14140f;
-  --color-ink-soft: #3a382f;
-  --color-ink-muted: #6b6a5f;
-  --color-border: #14140f;
+  --color-ink: #22261f;
+  --color-ink-soft: #3c4237;
+  --color-ink-muted: #656b5e;
+  --color-border: #22261f;
   --color-accent: var(--color-accent-500);
   --color-accent-text: var(--color-accent-600);
+  /* Error text on the contact card (bg-ink): light salmon on charcoal */
+  --color-danger: #f0b4aa;
 }
 
 .dark {
-  --color-surface: #131311;
-  --color-surface-soft: #1a1a17;
-  --color-surface-alt: #26251f;
-  --color-surface-card: rgba(255, 255, 255, 0.04)  ;
-  --color-ink: #eeece4;
-  --color-ink-soft: #c9c7bb;
-  --color-ink-muted: #8b8a7d;
-  --color-border: #eeece4;
-  --color-accent: var(--color-accent-400);
-  --color-accent-text: var(--color-accent-300);
+  --color-surface: #171915;
+  --color-surface-soft: #1e201c;
+  --color-surface-alt: #2a2d27;
+  --color-surface-card: rgba(255, 255, 255, 0.04);
+  --color-ink: #e8e7df;
+  --color-ink-soft: #c6c8bc;
+  --color-ink-muted: #8e9486;
+  --color-border: #e8e7df;
+  --color-accent: var(--color-accent-300);
+  --color-accent-text: var(--color-accent-200);
+  /* bg-ink is light in dark mode: use a deep muted red instead */
+  --color-danger: #8e3328;
 }
 
 @theme inline {
@@ -72,6 +76,7 @@
   --color-border: var(--color-border);
   --color-accent: var(--color-accent);
   --color-accent-text: var(--color-accent-text);
+  --color-danger: var(--color-danger);
 }
 
 html {
@@ -98,8 +103,13 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-accent-text);
   outline-offset: 3px;
+}
+
+/* Inside bg-ink blocks (contact card) the ring must contrast with ink, not surface */
+.bg-ink :focus-visible {
+  outline-color: var(--color-surface);
 }
 
 @media (prefers-reduced-motion: reduce) {

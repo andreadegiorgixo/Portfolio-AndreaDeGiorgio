@@ -83,7 +83,7 @@ export default function Contact() {
 
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
-                <label htmlFor="contact-name" className="text-xs font-semibold uppercase tracking-wide text-surface/60">
+                <label htmlFor="contact-name" className="text-xs font-semibold uppercase tracking-wide text-surface/65">
                   {t.contact.form.name}
                 </label>
                 <input
@@ -94,11 +94,11 @@ export default function Contact() {
                   value={form.name}
                   onChange={handleChange}
                   placeholder={t.contact.form.namePlaceholder}
-                  className="mt-1.5 w-full border border-surface/30 bg-transparent px-4 py-2.5 text-surface placeholder:text-surface/40 outline-none transition-colors focus:border-surface"
+                  className="mt-1.5 w-full border border-surface/50 bg-transparent px-4 py-2.5 text-surface placeholder:text-surface/65 outline-none transition-colors focus:border-surface"
                 />
               </div>
               <div>
-                <label htmlFor="contact-email" className="text-xs font-semibold uppercase tracking-wide text-surface/60">
+                <label htmlFor="contact-email" className="text-xs font-semibold uppercase tracking-wide text-surface/65">
                   {t.contact.form.email}
                 </label>
                 <input
@@ -109,13 +109,13 @@ export default function Contact() {
                   value={form.email}
                   onChange={handleChange}
                   placeholder={t.contact.form.emailPlaceholder}
-                  className="mt-1.5 w-full border border-surface/30 bg-transparent px-4 py-2.5 text-surface placeholder:text-surface/40 outline-none transition-colors focus:border-surface"
+                  className="mt-1.5 w-full border border-surface/50 bg-transparent px-4 py-2.5 text-surface placeholder:text-surface/65 outline-none transition-colors focus:border-surface"
                 />
               </div>
             </div>
 
             <div>
-              <label htmlFor="contact-message" className="text-xs font-semibold uppercase tracking-wide text-surface/60">
+              <label htmlFor="contact-message" className="text-xs font-semibold uppercase tracking-wide text-surface/65">
                 {t.contact.form.message}
               </label>
               <textarea
@@ -126,7 +126,7 @@ export default function Contact() {
                 value={form.message}
                 onChange={handleChange}
                 placeholder={t.contact.form.messagePlaceholder}
-                className="mt-1.5 w-full resize-none border border-surface/30 bg-transparent px-4 py-2.5 text-surface placeholder:text-surface/40 outline-none transition-colors focus:border-surface"
+                className="mt-1.5 w-full resize-none border border-surface/50 bg-transparent px-4 py-2.5 text-surface placeholder:text-surface/65 outline-none transition-colors focus:border-surface"
               />
             </div>
 
@@ -173,10 +173,10 @@ export default function Contact() {
               <p className="text-sm font-medium text-surface">{t.contact.form.success}</p>
             )}
             {status === "error" && (
-              <p className="text-sm font-medium text-red-400">{t.contact.form.error}</p>
+              <p className="text-sm font-medium text-danger">{t.contact.form.error}</p>
             )}
             {status === "privacy" && (
-              <p className="text-sm font-medium text-red-400">
+              <p className="text-sm font-medium text-danger">
                 {t.contact.form.privacyRequiredError}
               </p>
             )}
